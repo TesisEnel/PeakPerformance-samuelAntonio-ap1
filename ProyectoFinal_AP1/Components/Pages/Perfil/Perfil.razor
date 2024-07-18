@@ -1,0 +1,56 @@
+﻿@page "/Perfil"
+
+<div class="profile-container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    <img src="Images/150.png" class="rounded-circle img-fluid" alt="Foto del Usuario" />
+                    <h6>Fotografía</h6>
+                    <button class="btn btn-primary">Cambiar</button>
+                    <a href="#" class="d-block mt-2">¿Cambiar mi contraseña?</a>
+                </div>
+                <div class="col-md-9">
+                    <h5>Datos del Usuario</h5>
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="Nombre" class="form-label">Nombres</label>
+                                <input type="text" class="form-control" id="Nombre" value="Samuel Antonio" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="Apellidos" class="form-label">Apellidos</label>
+                                <input type="text" class="form-control" id="apellidos" value="Javier Pantaleon" readonly>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+
+                            <div class="col-md-6">
+                                <label for="Email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="Email" value="samuel@gmail.com" readonly>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="telefono" class="form-label">Teléfono</label>
+                                <input type="text" class="form-control" id="telefono" value="809-313-1861" readonly>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label for="direccion" class="form-label">Dirección</label>
+                                <textarea class="form-control" id="direccion" rows="2" readonly>Tenares</textarea>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+
+}

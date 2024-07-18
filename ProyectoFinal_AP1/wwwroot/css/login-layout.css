@@ -1,0 +1,11 @@
+﻿.login-layout {
+    background-image: url('../Images/king.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    overflow: auto;
+}
+
+.content {
+    padding: 20px;
+}

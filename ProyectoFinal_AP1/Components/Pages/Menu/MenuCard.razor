@@ -1,0 +1,22 @@
+﻿<div class="menu-card">
+    <a href="@Link">
+        <div class="card-content">
+            <h3>@Title</h3>
+            <img src="@ImageSrc" alt="@Title" class="card-image" />
+            <p>@Description</p>
+        </div>
+    </a>
+</div>
+@code {
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter]
+    public string ImageSrc { get; set; }
+
+    [Parameter]
+    public string Description { get; set; }
+
+    [Parameter]
+    public string Link { get; set; }
+}

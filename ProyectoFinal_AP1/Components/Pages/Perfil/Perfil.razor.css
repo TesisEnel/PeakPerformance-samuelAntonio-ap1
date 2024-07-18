@@ -1,0 +1,16 @@
+﻿body {
+}
+
+.profile-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+.card {
+    margin-top: 20px;
+}
+
+.img-fluid {
+    max-width: 150px;
+}

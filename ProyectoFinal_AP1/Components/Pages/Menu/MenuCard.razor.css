@@ -1,0 +1,39 @@
+﻿/* menu-card.css */
+.menu-card {
+    width: 250px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 15px;
+    transition: transform 0.2s;
+}
+
+    .menu-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .menu-card a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+.card-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.card-image {
+    max-width: 100px;
+    margin-bottom: 15px;
+}
+
+.card-content h3 {
+    margin: 10px 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.card-content p {
+    font-size: 1em;
+    color: #ffa500;
+}
