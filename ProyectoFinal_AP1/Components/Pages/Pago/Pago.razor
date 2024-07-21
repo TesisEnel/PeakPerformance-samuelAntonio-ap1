@@ -1,0 +1,118 @@
+﻿@page "/Pago"
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Suscripciones</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Suscripcion</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Carrito</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">.</a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <div class="dropdown">
+                    <a href="#" class="nav-link text-light" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="/Perfil">Editar Perfil</a></li>
+                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="payment-container">
+    <div class="payment-form">
+        <div class="form-group">
+            <label for="cardholderName">Nombre titular de la tarjeta</label>
+            <input type="text" id="cardholderName" @bind="CardholderName" class="form-control" placeholder="Nombre Completo" />
+        </div>
+       
+        <div class="form-group">
+            <label for="cardNumber">Número de tarjeta</label>
+            <input type="text" id="cardNumber" @bind="CardNumber" class="form-control" placeholder="Digite el numero de su tarjeta" />
+        </div>
+        <div class="form-group">
+            <label for="cvv">Código de seguridad</label>
+            <input type="text" id="cvv" @bind="CVV" class="form-control" placeholder="CVV" />
+        </div>
+        <div class="form-group">
+            <label for="expiryMonth">Fecha Vencimiento</label>
+            <div class="expiry-date">
+                <select id="expiryMonth" @bind="ExpiryMonth" class="form-control">
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+                <select id="expiryYear" @bind="ExpiryYear" class="form-control">
+                    @for (int i = DateTime.Now.Year; i <= DateTime.Now.Year + 10; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>
+            </div>
+        </div>
+      
+        <div class="form-group">
+            <label for="phoneNumber">Teléfono Celular</label>
+            <input type="text" id="phoneNumber" @bind="PhoneNumber" class="form-control" placeholder="Teléfono Celular" />
+        </div>
+        <div class="form-group">
+            <input type="checkbox" id="acceptTerms" @bind="AcceptTerms" />
+            <label for="acceptTerms">Acepto los términos y condiciones</label>
+        </div>
+        <button @onclick="SubmitPayment" class="btn btn-primary">Pagar</button>
+    </div>
+    <div class="card-visual">
+        <img src="Images/tarjeta.png" alt="Ayuda Visual" class="img-fluid" />
+    </div>
+</div>
+
+<style>
+    
+</style>
+
+@code {
+    private string CardholderName { get; set; }
+    private string DocumentType { get; set; } = "CC";
+    private string DocumentNumber { get; set; }
+    private string CardNumber { get; set; }
+    private string CVV { get; set; }
+    private int ExpiryMonth { get; set; }
+    private int ExpiryYear { get; set; }
+    private int Installments { get; set; } = 1;
+    private string PhoneNumber { get; set; }
+    private bool AcceptTerms { get; set; }
+
+    private void SubmitPayment()
+    {
+        if (AcceptTerms)
+        {
+            // Lógica para procesar el pago
+            Console.WriteLine("Pago enviado");
+        }
+        else
+        {
+            Console.WriteLine("Debe aceptar los términos y condiciones");
+        }
+    }
+}

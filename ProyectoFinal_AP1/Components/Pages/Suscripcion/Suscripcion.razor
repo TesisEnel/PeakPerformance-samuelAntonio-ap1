@@ -1,8 +1,9 @@
-﻿@page "/Entrenadores"
+﻿@page "/Suscripcion"
+@inject NavigationManager Navigation
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Entrenadores</a>
+        <a class="navbar-brand" href="#">Suscripciones</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -39,43 +40,60 @@
     </div>
 </nav>
 
-
-<div class="trainer-cards-container">
-    <div class="trainer-card">
+<div class="pricing-cards">
+    <div class="pricing-card">
         <div class="header">
-            <h2>Aaron Marizan</h2>
-            <img src="Images/entrenador.png" alt="Foto del Entrenador" class="trainer-photo" />
-            <p>Principiante</p>
+            <h2>BASICA</h2>
+            <img src="Images/Membresia.png" alt="Foto del Entrenador" class="trainer-photo" />
+            <p>Plan Basico</p>
         </div>
         <ul class="features">
-            <li><i class="icon"></i> Inscripción <span class="check">✔</span></li>
+            <li><i class="icon"></i> Inscripcion <span class="check">✔</span></li>
             <li><i class="icon"></i> Mensualidad <span class="check">✔</span></li>
-            <li class="inactive"><i class="icon"></i> Asesoría de Entrenador Mensual <span class="cross">✘</span></li>
+            <li class="inactive"><i class="icon"></i> Asesoria de Entrenador Mensual <span class="cross">✘</span></li>
             <li class="inactive"><i class="icon"></i> Dieta <span class="cross">✘</span></li>
         </ul>
-       
+        <a href="/Pago" class="price-btn">$2,000</a>
     </div>
 
-    <div class="trainer-card">
+    <div class="pricing-card">
         <div class="header">
-            <h2>Adiel Garcia</h2>
-            <img src="Images/entrenador.png" alt="Foto del Entrenador" class="trainer-photo" />
-            <p>Avanzado</p>
+            <h2>REGULAR</h2>
+            <img src="Images/Membresia2.png" alt="Foto del Entrenador" class="trainer-photo" />
+            <p>Plan Regular</p>
         </div>
         <ul class="features">
-            <li><i class="icon"></i> Inscripción <span class="check">✔</span></li>
+            <li><i class="icon"></i> Inscripcion <span class="check">✔</span></li>
             <li><i class="icon"></i> Mensualidad <span class="check">✔</span></li>
-            <li class="inactive"><i class="icon"></i> Asesoría de Entrenador Mensual <span class="cross">✘</span></li>
+            <li><i class="icon"></i> Asesoria de Entrenador Mensual <span class="check">✔</span></li>
             <li class="inactive"><i class="icon"></i> Dieta <span class="cross">✘</span></li>
         </ul>
-      
+        <a href="/Pago" class="price-btn">$3,000</a>
     </div>
+
+    <div class="pricing-card">
+        <div class="header">
+            <h2>PREMIUM</h2>
+            <img src="Images/GYM2.png" alt="Foto del Entrenador" class="trainer-photo" />
+            <p>Plan Premium</p>
+        </div>
+        <ul class="features">
+            <li><i class="icon"></i> Inscripcion <span class="check">✔</span></li>
+            <li><i class="icon"></i> Mensualidad <span class="check">✔</span></li>
+            <li><i class="icon"></i> Asesoria de Entrenador Mensual <span class="check">✔</span></li>
+            <li><i class="icon"></i> Dieta <span class="check">✔</span></li>
+        </ul>
+        <a href="/Pago" class="price-btn">$5,000</a>
+    </div>
+    
 </div>
 
+
+
 @code {
-    private void Pagar()
+    public void Pagar()
     {
-        
-        Console.WriteLine("Pago iniciado para el plan básico");
+        Console.WriteLine($"Pago iniciado para el plan");
+        Navigation.NavigateTo("/Pago");
     }
 }

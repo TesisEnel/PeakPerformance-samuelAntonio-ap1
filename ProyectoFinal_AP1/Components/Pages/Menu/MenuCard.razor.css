@@ -1,7 +1,6 @@
-﻿/* menu-card.css */
-.menu-card {
+﻿.menu-card {
     width: 250px;
-    background: #fff;
+    background: #2e2e2e; /* Fondo gris */
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 15px;
@@ -14,7 +13,7 @@
 
     .menu-card a {
         text-decoration: none;
-        color: inherit;
+        color: #ffffff; /* Texto blanco */
     }
 
 .card-content {
@@ -30,10 +29,10 @@
 .card-content h3 {
     margin: 10px 0;
     font-size: 1.2em;
-    color: #333;
+    color: #ffffff; /* Título blanco */
 }
 
 .card-content p {
     font-size: 1em;
-    color: #ffa500;
+    color: #ffffff; /* Texto blanco */
 }

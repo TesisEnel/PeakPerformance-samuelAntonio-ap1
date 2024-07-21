@@ -1,6 +1,39 @@
-﻿.menu-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+﻿.page-specific {
+    background-color: #000000;
+    color: #FFFFFF;
+    min-height: 100vh;
     padding: 20px;
 }
+
+    .page-specific .navbar {
+        background-color: #000000;
+    }
+
+    .page-specific .menu-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 20px;
+    }
+
+    .page-specific * {
+        border-color: #000000;
+    }
+
+    .page-specific .navbar,
+    .page-specific .menu-container,
+    .page-specific .navbar-brand,
+    .page-specific .nav-link,
+    .page-specific .dropdown-menu,
+    .page-specific .dropdown-item {
+        color: #FFFFFF; 
+    }
+
+    
+    .page-specific .dropdown-menu {
+        background-color: #000000; 
+    }
+
+    .page-specific .dropdown-item:hover {
+        background-color: #333333;
+    }
