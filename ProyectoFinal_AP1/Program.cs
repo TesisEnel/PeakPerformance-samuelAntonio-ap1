@@ -1,7 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using ProyectoFinal_AP1.Components;
-using ProyectoFinal_AP1.Context;
+using ProyectoFinal_AP1.DAL;
+using ProyectoFinal_AP1.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +12,13 @@ builder.Services.AddBlazorBootstrap();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-// builder.Services.AddDbContext<Context>(op => op.UseSqlServer("name=DefaultConnection"));
+builder.Services.AddDbContext<AppDBContext>(op =>
+{
+
+    op.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<AutorizacionService>();
 
 var app = builder.Build();
 
@@ -28,6 +36,8 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+
+
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();

@@ -1,0 +1,46 @@
+﻿body {
+}
+.support-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+    .support-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+    .contact-item i {
+        font-size: 2rem;
+        color: #007bff;
+    }
+
+.contact-details h4 {
+    margin: 0;
+    color: #007bff;
+}
+
+.contact-details p {
+    margin: 5px 0 0;
+    color: #555;
+}

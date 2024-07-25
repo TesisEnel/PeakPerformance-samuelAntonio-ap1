@@ -1,26 +1,41 @@
 ﻿@page "/SignUp"
 
-
+@inject UserService userService
+@inject NavigationManager navigationManager
+@rendermode InteractiveServer
 
 <div class="loginBox">
-
     <img class="user" src="Images/usuario.png" alt="Foto del Usuario" height="100px" width="100px">
     <h3>Registrarse</h3>
 
-    <div class="inputBox">
-        <input id="nombre" type="text" name="nombre" placeholder="Nombres">
-        <input id="apellido" type="text" name="apellido" placeholder="Apellidos">
-        <input id="email" type="text" name="email" placeholder="Email">
-        <input id="telefono" type="text" name="telefono" placeholder="Telefono">
-        <input id="pass" type="password" name="contrasena" placeholder="Contraseña">
-        <input id="pass" type="password" name="contrasena" placeholder="Repita la Contraseña">
-    </div>
-    <a href="/Menu" class="btn-login">Crear Cuenta</a>
-
-
-
+    <EditForm Model="Usuario" OnValidSubmit="HandleValidSubmit">
+        <div class="inputBox">
+            <InputText id="nombre" type="text" @bind-Value="Usuario.Nombre" placeholder="Nombres" />
+            <InputText id="email" type="text" @bind-Value="Usuario.Correo" placeholder="Email" />
+            <InputText id="pass" type="password" @bind-Value="Usuario.Clave" placeholder="Contraseña" />
+        </div>
+        <button type="submit" class="btn-login">Crear Cuenta</button>
+    </EditForm>
 </div>
 
 @code {
+    private Usuario Usuario = new Usuario();
+ 
+
+    private async Task HandleValidSubmit()
+    {
+       
+
+        bool isRegistered = await userService.RegisterUser(Usuario);
+
+        if (isRegistered)
+        {
+            navigationManager.NavigateTo("/Menu");
+        }
+        else
+        {
+            
+        }
+    }
 
 }

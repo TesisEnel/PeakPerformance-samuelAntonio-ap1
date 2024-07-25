@@ -1,36 +1,43 @@
 ﻿@page "/"
-@layout LoginLayout
+@inject AutorizacionService autorizacionService
 @inject NavigationManager navigationManager
+@rendermode InteractiveServer
 
 <div class="loginBox">
-    
-    <img class ="user" src="Images/usuario.png" alt="Foto del Usuario" height="100px" width="100px"> 
+    <img class="user" src="Images/usuario.png" alt="Foto del Usuario" height="100px" width="100px">
     <h3>Iniciar Sesi&oacute;n</h3>
-    
-        <div class="inputBox"> 
-            <input id="email" type="text" name="email" placeholder="Email"> 
-            <input id="pass" type="password" name="contrasena" placeholder="Contraseña"> 
-            </div>
-    <a href="/Menu" class="btn-login">Login</a>
-            
-    
-    <a href="#" style="color: white;">Olvidaste tu Contraseña?<br> </a>
-    <div class="text-center">
-        <a href="/SignUp" style="color: white;">Registrarse<br> </a>
-    </div>
 
+    <EditForm Model="login" OnValidSubmit="HandleValidSubmit">
+        <div class="inputBox">
+            <InputText id="email" type="text" @bind-Value="login.Correo" placeholder="Email" />
+            <InputText id="pass" type="password" @bind-Value="login.Clave" placeholder="Contraseña" />
+        </div>
+        <button type="submit" class="btn-login">Login</button>
+    </EditForm>
+
+    <a href="#" style="color: white;">Olvidaste tu Contraseña?<br></a>
+    <div class="text-center">
+        <a href="/SignUp" style="color: white;">Registrarse<br></a>
+    </div>
 </div>
 
-
-
-
-
-
 @code {
+    private Login login = new Login();
 
-    public void IniciarSesion()
+    private async Task HandleValidSubmit()
     {
-        navigationManager.NavigateTo("/Menu");
+        var user = await autorizacionService.Authenticate(login.Correo, login.Clave);
+
+        if (user != null)
+        {
+           
+            navigationManager.NavigateTo("/Menu");
+        }
+        else
+        {
+            
+        }
     }
 
+   
 }
