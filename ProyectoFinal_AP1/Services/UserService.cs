@@ -25,4 +25,8 @@ public class UserService
         await _context.SaveChangesAsync();
         return true;
     }
+    public async Task<List<Usuario>> ObtenerUsuarios()
+    {
+        return await _context.Usuarios.ToListAsync();
+    }
 }

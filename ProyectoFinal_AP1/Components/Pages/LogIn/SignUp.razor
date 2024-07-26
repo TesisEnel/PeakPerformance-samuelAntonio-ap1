@@ -16,6 +16,7 @@
             <InputText id="pass" type="password" @bind-Value="Usuario.Clave" placeholder="Contraseña" />
             <InputText id="telefono" type="text" @bind-Value="Usuario.Telefono" placeholder="Telefono" />
             <InputText id="direccion" type="text" @bind-Value="Usuario.Direccion" placeholder="Direccion" />
+            <InputFile OnChange="HandleSelected" />
         </div>
         <button type="submit" class="btn-login">Crear Cuenta</button>
     </EditForm>
@@ -24,7 +25,15 @@
 @code {
     private Usuario Usuario = new Usuario();
  
+    private IBrowserFile fotoPerfil;
 
+    private async Task HandleSelected(InputFileChangeEventArgs e)
+    {
+        fotoPerfil = e.File;
+        var buffer = new byte[fotoPerfil.Size];
+        await fotoPerfil.OpenReadStream().ReadAsync(buffer);
+        Usuario.FotoPerfil = buffer;
+    }
     private async Task HandleValidSubmit()
     {
        

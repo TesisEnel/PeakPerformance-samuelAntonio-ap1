@@ -1,6 +1,55 @@
 ﻿@page "/Usuarios"
-<h3>Usuariios</h3>
+@inject UserService userService
+
+<h3>Usuarios Registrados</h3>
+
+@if (usuarios == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else if (usuarios.Count == 0)
+{
+    <p>No hay usuarios registrados.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Foto de Perfil</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var usuario in usuarios)
+            {
+                <tr>
+                    <td>@usuario.Nombre</td>
+                    <td>@usuario.Apellido</td>
+                    <td>@usuario.Correo</td>
+                    <td>@usuario.Telefono</td>
+                    <td>@usuario.Direccion</td>
+                    <td>
+                        @if (usuario.FotoPerfil != null)
+                        {
+                            <img src="data:image/png;base64,@Convert.ToBase64String(usuario.FotoPerfil)" alt="Foto de Perfil" width="50" height="50" />
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 
 @code {
+    private List<Usuario> usuarios;
 
+    protected override async Task OnInitializedAsync()
+    {
+        usuarios = await userService.ObtenerUsuarios();
+    }
 }
