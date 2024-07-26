@@ -11,8 +11,11 @@
     <EditForm Model="Usuario" OnValidSubmit="HandleValidSubmit">
         <div class="inputBox">
             <InputText id="nombre" type="text" @bind-Value="Usuario.Nombre" placeholder="Nombres" />
+            <InputText id="apellido" type="text" @bind-Value="Usuario.Apellido" placeholder="Apellidos" />
             <InputText id="email" type="text" @bind-Value="Usuario.Correo" placeholder="Email" />
             <InputText id="pass" type="password" @bind-Value="Usuario.Clave" placeholder="Contraseña" />
+            <InputText id="telefono" type="text" @bind-Value="Usuario.Telefono" placeholder="Telefono" />
+            <InputText id="direccion" type="text" @bind-Value="Usuario.Direccion" placeholder="Direccion" />
         </div>
         <button type="submit" class="btn-login">Crear Cuenta</button>
     </EditForm>
@@ -30,7 +33,7 @@
 
         if (isRegistered)
         {
-            navigationManager.NavigateTo("/Menu");
+            navigationManager.NavigateTo("/");
         }
         else
         {

@@ -11,7 +11,7 @@ using ProyectoFinal_AP1.DAL;
 namespace ProyectoFinal_AP1.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20240722032900_Inicial")]
+    [Migration("20240726052517_Inicial")]
     partial class Inicial
     {
         /// <inheritdoc />
@@ -32,6 +32,10 @@ namespace ProyectoFinal_AP1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdUsuario"));
 
+                    b.Property<string>("Apellido")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Clave")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -42,10 +46,18 @@ namespace ProyectoFinal_AP1.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Telefono")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdUsuario");
 

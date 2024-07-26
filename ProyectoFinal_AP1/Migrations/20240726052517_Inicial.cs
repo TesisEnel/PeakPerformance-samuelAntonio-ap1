@@ -17,8 +17,11 @@ namespace ProyectoFinal_AP1.Migrations
                     IdUsuario = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Apellido = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Correo = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Clave = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    Clave = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Direccion = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
