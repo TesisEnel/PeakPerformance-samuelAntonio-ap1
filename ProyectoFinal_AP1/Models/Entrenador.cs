@@ -1,7 +1,10 @@
-﻿namespace ProyectoFinal_AP1.Models;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ProyectoFinal_AP1.Models;
 
 public class Entrenador
 {
+    [Key]
     public int IdEntrenador {  get; set; }
     public string Nombre { get; set; }
     public string Nivel { get; set; }
