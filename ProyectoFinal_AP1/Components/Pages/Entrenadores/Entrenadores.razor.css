@@ -1,93 +1,28 @@
-﻿.trainer-cards-container {
+﻿.trainer-cards {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* Espacio entre las tarjetas */
-    justify-content: center; /* Centrar las tarjetas horizontalmente */
+    justify-content: center;
+    gap: 15px;
     padding: 20px;
 }
 
 .trainer-card {
-    width: 300px;
     background: #fff;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 15px;
-    padding: 20px;
-    transition: transform 0.2s;
     text-align: center;
+    padding: 20px;
+    width: 250px;
+    transition: transform 0.2s;
 }
 
     .trainer-card:hover {
         transform: translateY(-5px);
     }
 
-.header {
-    padding-bottom: 15px;
-    border-bottom: 1px solid #eee;
-    text-align: center; /* Centrar el contenido del header */
+.trainer-photo {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
 }
-
-    .header h2 {
-        margin: 0;
-        font-size: 1.5em;
-        font-weight: bold;
-    }
-
-    .header img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        margin: 10px auto; /* Ajusta el margen para centrar la imagen */
-        display: block; /* Hace que la imagen se comporte como un bloque para poder centrarla */
-    }
-
-    .header p {
-        margin: 5px 0 0;
-        color: #666;
-    }
-
-.features {
-    list-style: none;
-    padding: 0;
-    margin: 20px 0;
-    text-align: left;
-}
-
-    .features li {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 5px 0;
-        color: #333;
-    }
-
-    .features .inactive {
-        color: #ccc;
-    }
-
-.check {
-    color: green;
-}
-
-.cross {
-    color: red;
-}
-
-.price-btn {
-    width: 100%;
-    padding: 15px;
-    background-color: #ff6600;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-size: 1.2em;
-    text-align: center;
-}
-
-    .price-btn:hover {
-        background-color: #e65c00;
-    }

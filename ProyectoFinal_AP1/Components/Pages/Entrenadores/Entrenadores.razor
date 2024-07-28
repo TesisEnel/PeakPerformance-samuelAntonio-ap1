@@ -1,126 +1,66 @@
 ﻿@page "/Entrenadores"
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Entrenadores</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Productos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Suscripcion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Carrito</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">.</a>
-                </li>
-            </ul>
-            <form class="d-flex">
-                <div class="dropdown">
-                    <a href="#" class="nav-link text-light" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <li><a class="dropdown-item" href="/Perfil">Editar Perfil</a></li>
-                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
-                    </ul>
-                </div>
-            </form>
+@inject EntrenadorService entrenadorService
+<div class="page-specific">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Proyecto_AP1</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Suscripcion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Carrito</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <div class="dropdown">
+                        <a href="#" class="nav-link text-light" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="/Perfil">Editar Perfil</a></li>
+                            <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-</nav>
-
-
-<div class="trainer-cards-container">
-    <div class="trainer-card">
-        <div class="header">
-            <h2>Aaron Marizan</h2>
-            <img src="Images/entrenador.png" alt="Foto del Entrenador" class="trainer-photo" />
-            <p>Principiante</p>
-        </div>
-        <ul class="features">
-            <li><i class="icon"></i> Inscripción <span class="check">✔</span></li>
-            <li><i class="icon"></i> Mensualidad <span class="check">✔</span></li>
-            <li class="inactive"><i class="icon"></i> Asesoría de Entrenador Mensual <span class="cross">✘</span></li>
-            <li class="inactive"><i class="icon"></i> Dieta <span class="cross">✘</span></li>
-        </ul>
-       
+    </nav>
     </div>
 
-    <div class="trainer-card">
-        <div class="header">
-            <h2>Adiel Garcia</h2>
-            <img src="Images/entrenador.png" alt="Foto del Entrenador" class="trainer-photo" />
-            <p>Avanzado</p>
+<button class="btn btn-primary" @onclick="Ir">+</button>
+
+<div class="trainer-cards">
+    @foreach (var entrenador in entrenadores)
+    {
+        <div class="trainer-card">
+            <img src="data:image/png;base64,@Convert.ToBase64String(entrenador.FotoPerfil)" alt="Foto del Entrenador" class="trainer-photo" />
+            <h4>@entrenador.Nombre </h4>
+            <p>@entrenador.Nivel</p>
         </div>
-        <ul class="features">
-            <li><i class="icon"></i> Inscripción <span class="check">✔</span></li>
-            <li><i class="icon"></i> Mensualidad <span class="check">✔</span></li>
-            <li class="inactive"><i class="icon"></i> Asesoría de Entrenador Mensual <span class="cross">✘</span></li>
-            <li class="inactive"><i class="icon"></i> Dieta <span class="cross">✘</span></li>
-        </ul>
-      
-    </div>
-
-    <div class="trainer-card">
-        <div class="header">
-            <h2>Deylin Reyes</h2>
-            <img src="Images/entrenador.png" alt="Foto del Entrenador" class="trainer-photo" />
-            <p>Avanzado</p>
-        </div>
-        <ul class="features">
-            <li><i class="icon"></i> Inscripción <span class="check">✔</span></li>
-            <li><i class="icon"></i> Mensualidad <span class="check">✔</span></li>
-            <li class="inactive"><i class="icon"></i> Asesoría de Entrenador Mensual <span class="cross">✘</span></li>
-            <li class="inactive"><i class="icon"></i> Dieta <span class="cross">✘</span></li>
-        </ul>
-
-    </div>
-
-    <div class="trainer-card">
-        <div class="header">
-            <h2>Ana Sofia</h2>
-            <img src="Images/entrenador.png" alt="Foto del Entrenador" class="trainer-photo" />
-            <p>Avanzado</p>
-        </div>
-        <ul class="features">
-            <li><i class="icon"></i> Inscripción <span class="check">✔</span></li>
-            <li><i class="icon"></i> Mensualidad <span class="check">✔</span></li>
-            <li class="inactive"><i class="icon"></i> Asesoría de Entrenador Mensual <span class="cross">✘</span></li>
-            <li class="inactive"><i class="icon"></i> Dieta <span class="cross">✘</span></li>
-        </ul>
-
-    </div>
-
-    <div class="trainer-card">
-        <div class="header">
-            <h2>Luis Miguel</h2>
-            <img src="Images/entrenador.png" alt="Foto del Entrenador" class="trainer-photo" />
-            <p>Avanzado</p>
-        </div>
-        <ul class="features">
-            <li><i class="icon"></i> Inscripción <span class="check">✔</span></li>
-            <li><i class="icon"></i> Mensualidad <span class="check">✔</span></li>
-            <li class="inactive"><i class="icon"></i> Asesoría de Entrenador Mensual <span class="cross">✘</span></li>
-            <li class="inactive"><i class="icon"></i> Dieta <span class="cross">✘</span></li>
-        </ul>
-
-    </div>
+    }
 </div>
 
 @code {
-    private void Pagar()
+    private List<Entrenador> entrenadores = new List<Entrenador>();
+
+    protected override async Task OnInitializedAsync()
     {
-        
-        Console.WriteLine("Pago iniciado para el plan básico");
+        entrenadores = await entrenadorService.ObtenerEntrenadores();
     }
+
+        private void Ir()
+        {
+            NavigationManager.NavigateTo("/AgregarEntrenador");
+        }
 }

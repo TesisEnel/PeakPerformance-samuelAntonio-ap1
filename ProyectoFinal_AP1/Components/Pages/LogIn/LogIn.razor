@@ -9,8 +9,8 @@
 
     <EditForm Model="login" OnValidSubmit="HandleValidSubmit">
         <div class="inputBox">
-            <InputText id="email" type="text" @bind-Value="login.Correo" placeholder="Email" />
-            <InputText id="pass" type="password" @bind-Value="login.Clave" placeholder="Contraseña" />
+            <InputText id="email" type="text" @bind-Value="login.Correo" class="form-control" placeholder="Email" />
+            <InputText id="pass" type="password" @bind-Value="login.Clave" class="form-control" placeholder="Contraseña" />
         </div>
         <button type="submit" class="btn-login">Login</button>
     </EditForm>

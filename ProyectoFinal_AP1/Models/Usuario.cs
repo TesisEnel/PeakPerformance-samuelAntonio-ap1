@@ -13,6 +13,7 @@ public class Usuario
     public string Clave { get; set; }
     public string Telefono { get; set; }
     public string Direccion { get; set; }
+    public bool Estado { get; set; }
     public byte[] FotoPerfil { get; set; }
 
     public int? IdSuscripcion { get; set; }
