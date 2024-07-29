@@ -1,11 +1,24 @@
 ﻿@page "/Perfil"
 
-<div class="profile-container">
+@page "/perfil"
+@inject AutorizacionService AutorizacionService
+@inject NavigationManager NavigationManager
+@code {
+    private Usuario usuario;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var email = "usuario@example.com"; // Obtén el email del usuario actual de alguna manera
+        
+    }
+}
+
+<div class="profile-container" style="margin-top: 50px;">
     <div class="card">
         <div class="card-body">
             <div class="row">
                 <div class="col-md-3 text-center">
-                    <img src="Images/150.png" class="rounded-circle img-fluid" alt="Foto del Usuario" />
+                    <img src="data:image/png;base64,@Convert.ToBase64String(usuario?.FotoPerfil)" class="rounded-circle img-fluid" alt="Foto del Usuario" />
                     <h6>Fotografía</h6>
                     <button class="btn btn-primary">Cambiar</button>
                     <a href="#" class="d-block mt-2">¿Cambiar mi contraseña?</a>
@@ -16,30 +29,27 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="Nombre" class="form-label">Nombres</label>
-                                <input type="text" class="form-control" id="Nombre" value="Samuel Antonio" readonly>
+                                <input type="text" class="form-control" id="Nombre" value="@usuario?.Nombre" readonly>
                             </div>
                             <div class="col-md-6">
                                 <label for="Apellidos" class="form-label">Apellidos</label>
-                                <input type="text" class="form-control" id="apellidos" value="Javier Pantaleon" readonly>
+                                <input type="text" class="form-control" id="apellidos" value="@usuario?.Apellido" readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
-
                             <div class="col-md-6">
                                 <label for="Email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="Email" value="samuel@gmail.com" readonly>
+                                <input type="email" class="form-control" id="Email" value="@usuario?.Correo" readonly>
                             </div>
-
                             <div class="col-md-6">
                                 <label for="telefono" class="form-label">Teléfono</label>
-                                <input type="text" class="form-control" id="telefono" value="809-313-1861" readonly>
+                                <input type="text" class="form-control" id="telefono" value="@usuario?.Telefono" readonly>
                             </div>
                         </div>
-
                         <div class="row mb-3">
                             <div class="col-md-12">
                                 <label for="direccion" class="form-label">Dirección</label>
-                                <textarea class="form-control" id="direccion" rows="2" readonly>Tenares</textarea>
+                                <textarea class="form-control" id="direccion" rows="2" readonly>@usuario?.Direccion</textarea>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-success">Guardar</button>
@@ -51,6 +61,3 @@
 </div>
 
 
-@code {
-
-}

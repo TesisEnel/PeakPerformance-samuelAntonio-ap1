@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using ProyectoFinal_AP1.Components;
+using Microsoft.Extensions.DependencyInjection;
 using ProyectoFinal_AP1.DAL;
 using ProyectoFinal_AP1.Services;
-
+using Microsoft.AspNetCore.Identity;
+using ProyectoFinal_AP1.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +23,6 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<AutorizacionService>();
 builder.Services.AddScoped<EntrenadorService>();
 builder.Services.AddScoped<SuscripcionService>();
-
 
 var app = builder.Build();
 

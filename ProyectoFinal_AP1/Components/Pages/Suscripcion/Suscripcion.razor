@@ -55,7 +55,7 @@
             <ul class="features">
               
             </ul>
-            <a href="/Pago" class="price-btn">$@suscripcion.Precio</a>
+            <button  class="price-btn" @onclick="Pagar">$@suscripcion.Precio</button>
 
         </div>
     }
@@ -73,7 +73,7 @@
 
     public void Pagar()
     {
-        Console.WriteLine($"Pago iniciado para el plan");
+       
         Navigation.NavigateTo("/Pago");
     }
 
