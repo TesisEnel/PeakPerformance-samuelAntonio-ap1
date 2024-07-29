@@ -1,5 +1,8 @@
 ﻿@page "/Suscripcion"
 @inject NavigationManager Navigation
+@inject ProyectoFinal_AP1.Services.SuscripcionService SuscripcionService
+@rendermode InteractiveServer
+@using SuscripcionModel = ProyectoFinal_AP1.Models.Suscripcion
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
@@ -41,59 +44,45 @@
 </nav>
 
 <div class="pricing-cards">
-    <div class="pricing-card">
-        <div class="header">
-            <h2>BASICA</h2>
-            <img src="Images/Membresia.png" alt="Foto del Entrenador" class="trainer-photo" />
-            <p>Plan Basico</p>
-        </div>
-        <ul class="features">
-            <li><i class="icon"></i> Inscripcion <span class="check">✔</span></li>
-            <li><i class="icon"></i> Mensualidad <span class="check">✔</span></li>
-            <li class="inactive"><i class="icon"></i> Asesoria de Entrenador Mensual <span class="cross">✘</span></li>
-            <li class="inactive"><i class="icon"></i> Dieta <span class="cross">✘</span></li>
-        </ul>
-        <a href="/Pago" class="price-btn">$2,000</a>
-    </div>
+    @foreach (var suscripcion in suscripciones)
+    {
+        <div class="pricing-card">
+            <div class="header">
+                <h2>@suscripcion.Descripcion</h2>
+                <img src="data:image/png;base64,@Convert.ToBase64String(suscripcion.FotoPerfil)" alt="Foto de la Suscripción" class="trainer-photo" />
+                <p>@suscripcion.Descripcion</p>
+            </div>
+            <ul class="features">
+              
+            </ul>
+            <a href="/Pago" class="price-btn">$@suscripcion.Precio</a>
 
-    <div class="pricing-card">
-        <div class="header">
-            <h2>REGULAR</h2>
-            <img src="Images/Membresia2.png" alt="Foto del Entrenador" class="trainer-photo" />
-            <p>Plan Regular</p>
         </div>
-        <ul class="features">
-            <li><i class="icon"></i> Inscripcion <span class="check">✔</span></li>
-            <li><i class="icon"></i> Mensualidad <span class="check">✔</span></li>
-            <li><i class="icon"></i> Asesoria de Entrenador Mensual <span class="check">✔</span></li>
-            <li class="inactive"><i class="icon"></i> Dieta <span class="cross">✘</span></li>
-        </ul>
-        <a href="/Pago" class="price-btn">$3,000</a>
-    </div>
-
-    <div class="pricing-card">
-        <div class="header">
-            <h2>PREMIUM</h2>
-            <img src="Images/GYM2.png" alt="Foto del Entrenador" class="trainer-photo" />
-            <p>Plan Premium</p>
-        </div>
-        <ul class="features">
-            <li><i class="icon"></i> Inscripcion <span class="check">✔</span></li>
-            <li><i class="icon"></i> Mensualidad <span class="check">✔</span></li>
-            <li><i class="icon"></i> Asesoria de Entrenador Mensual <span class="check">✔</span></li>
-            <li><i class="icon"></i> Dieta <span class="check">✔</span></li>
-        </ul>
-        <a href="/Pago" class="price-btn">$5,000</a>
-    </div>
-    
+    }
 </div>
-
-
+<button class="btn btn-primary" @onclick="Ir">+</button>
+<button class="btn btn-primary" @onclick="Comparacion">Comparar</button>
 
 @code {
+    private List<SuscripcionModel> suscripciones = new List<SuscripcionModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        suscripciones = await SuscripcionService.GetSuscripcionesAsync();
+    }
+
     public void Pagar()
     {
         Console.WriteLine($"Pago iniciado para el plan");
         Navigation.NavigateTo("/Pago");
+    }
+
+    private void Ir()
+    {
+        Navigation.NavigateTo("/AgregarSuscripcion");
+    }
+    private void Comparacion()
+    {
+        Navigation.NavigateTo("/Comparacion");
     }
 }

@@ -20,6 +20,8 @@ builder.Services.AddDbContext<AppDBContext>(op =>
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<AutorizacionService>();
 builder.Services.AddScoped<EntrenadorService>();
+builder.Services.AddScoped<SuscripcionService>();
+
 
 var app = builder.Build();
 

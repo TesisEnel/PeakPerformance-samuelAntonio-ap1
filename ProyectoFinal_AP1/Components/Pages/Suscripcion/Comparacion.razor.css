@@ -1,0 +1,97 @@
+﻿﻿.pricing-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.pricing-card {
+    width: 300px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 15px;
+    padding: 20px;
+    transition: transform 0.2s;
+    text-align: center; /* Asegura que todo el contenido esté centrado */
+}
+
+    .pricing-card:hover {
+        transform: translateY(-5px);
+    }
+
+.header {
+    text-align: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+    .header h2 {
+        margin: 0;
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    .header img {
+        width: 100px; /* Tamaño de la imagen */
+        height: 100px; /* Tamaño de la imagen */
+        margin: 10px auto; /* Centra la imagen horizontalmente */
+        display: block; /* Hace que la imagen se comporte como un bloque para poder centrarla */
+    }
+
+    .header p {
+        margin: 5px 0 0;
+        color: #666;
+    }
+
+.features {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: left; /* Alinea las características a la izquierda */
+}
+
+    .features li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 0;
+        color: #333;
+    }
+
+    .features .inactive {
+        color: #ccc;
+    }
+
+.check {
+    color: green;
+}
+
+.cross {
+    color: red;
+}
+
+.price {
+    text-align: center;
+    background: #ff6600;
+    color: white;
+    padding: 10px;
+    border-radius: 25px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.price-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 1.2em;
+    text-align: center;
+}

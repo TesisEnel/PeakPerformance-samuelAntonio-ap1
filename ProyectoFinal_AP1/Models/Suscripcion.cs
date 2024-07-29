@@ -16,4 +16,5 @@ public class Suscripcion
 
     public int? IdEntrenador { get; set; }
     public Entrenador Entrenador { get; set; }
+    public byte[] FotoPerfil { get; set; }
 }

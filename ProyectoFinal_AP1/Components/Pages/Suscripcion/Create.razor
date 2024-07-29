@@ -1,0 +1,55 @@
+﻿@page "/AgregarSuscripcion"
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+@inject SuscripcionService suscripcionService
+@using SuscripcionModel = ProyectoFinal_AP1.Models.Suscripcion
+
+<EditForm Model="nuevaSuscripcion" OnValidSubmit="GuardarEntrenador">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="nombre">Descripcion</label>
+        <InputText id="nombre" class="form-control" @bind-Value="nuevaSuscripcion.Descripcion" />
+    </div>
+
+    <div class="form-group">
+        <label for="nombre">Descripcion</label>
+        <InputNumber id="nombre" class="form-control" @bind-Value="nuevaSuscripcion.Precio" />
+    </div>
+
+    <div class="form-group">
+        <label for="nivel">Fecha</label>
+        <InputDate id="nivel" class="form-control" @bind-Value="nuevaSuscripcion.FechaInicio" />
+    </div>
+
+    <div class="form-group">
+        <label for="nivel">Fecha</label>
+        <InputDate id="nivel" class="form-control" @bind-Value="nuevaSuscripcion.FechaFin" />
+    </div>
+
+    <div class="form-group">
+        <label for="fotoPerfil">Foto de Perfil</label>
+        <InputFile id="fotoPerfil" OnChange="CargarFotoPerfil" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</EditForm>
+
+@code {
+    private SuscripcionModel nuevaSuscripcion = new SuscripcionModel();
+
+    private async Task CargarFotoPerfil(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        var buffer = new byte[file.Size];
+        await file.OpenReadStream().ReadAsync(buffer);
+        nuevaSuscripcion.FotoPerfil = buffer;
+    }
+
+    private async Task GuardarEntrenador()
+    {
+        await suscripcionService.GuardarAsync(nuevaSuscripcion);
+        NavigationManager.NavigateTo("/Entrenadores");
+    }
+}
