@@ -27,7 +27,15 @@
 
     private async Task HandleValidSubmit()
     {
-      
+        var user = await autorizacionService.Authenticate(login.Correo, login.Clave);
+        if(user != null)
+        {
+            navigationManager.NavigateTo("/Menu");
+        }
+        else
+        {
+            
+        }
     }
 
    

@@ -13,8 +13,8 @@ public class AutorizacionService
         _context = context;
     }
 
-    public async Task<Usuario> GetAuthenticatedUserAsync(string email)
+    public async Task<Usuario> Authenticate(string email, string password)
     {
-        return await _context.Usuarios.SingleOrDefaultAsync(u => u.Correo == email);
+        return await _context.Usuarios.SingleOrDefaultAsync(u => u.Correo == email && u.Clave == password);
     }
 }
