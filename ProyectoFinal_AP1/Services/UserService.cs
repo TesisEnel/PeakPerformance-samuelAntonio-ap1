@@ -29,4 +29,9 @@ public class UserService
     {
         return await _context.Usuarios.ToListAsync();
     }
+
+    public async Task<Usuario> GetUserByEmailAsync(string email)
+    {
+        return await _context.Usuarios.FirstOrDefaultAsync(u => u.Correo == email);
+    }
 }
