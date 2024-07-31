@@ -1,17 +1,9 @@
 ﻿@page "/Perfil"
 
-@page "/perfil"
+
 @inject AutorizacionService AutorizacionService
 @inject NavigationManager NavigationManager
-@code {
-    private Usuario usuario;
 
-    protected override async Task OnInitializedAsync()
-    {
-        var email = "usuario@example.com"; // Obtén el email del usuario actual de alguna manera
-        
-    }
-}
 
 <div class="profile-container" style="margin-top: 50px;">
     <div class="card">
@@ -59,5 +51,12 @@
         </div>
     </div>
 </div>
+@code {
+    private Usuario usuario;
 
+    protected override async Task OnInitializedAsync()
+    {
+        var email = "usuario@example.com";
 
+    }
+}

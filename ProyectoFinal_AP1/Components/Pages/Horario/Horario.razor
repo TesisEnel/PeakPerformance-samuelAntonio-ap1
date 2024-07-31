@@ -1,9 +1,5 @@
-﻿@page "/Usuarios"
-@inject UserService userService
-
-<h3>Usuarios Registrados</h3>
-
-
+﻿@page "/Horario"
+@inject NavigationManager Navigation
 
 <div class="page-specific">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -31,53 +27,37 @@
     </nav>
 </div>
 
-@if (usuarios == null)
-{
-    <p><em>Cargando...</em></p>
-}
-else if (usuarios.Count == 0)
-{
-    <p>No hay usuarios registrados.</p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Correo</th>
-                <th>Teléfono</th>
-                <th>Dirección</th>
-                <th>Foto de Perfil</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var usuario in usuarios)
-            {
+<div class="schedule-container mt-5">
+
+    <div class="schedule-table">
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td>@usuario.Nombre</td>
-                    <td>@usuario.Apellido</td>
-                    <td>@usuario.Correo</td>
-                    <td>@usuario.Telefono</td>
-                    <td>@usuario.Direccion</td>
-                    <td>
-                        @if (usuario.FotoPerfil != null)
-                        {
-                            <img src="data:image/png;base64,@Convert.ToBase64String(usuario.FotoPerfil)" alt="Foto de Perfil" width="50" height="50" />
-                        }
-                    </td>
+                    <th>Día</th>
+                    <th>Horario</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-}
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Lunes a Viernes</td>
+                    <td>5:30 AM - 10:00 PM</td>
+                </tr>
+                <tr>
+                    <td>Sábados</td>
+                    <td>5:30 AM - 4:00 PM</td>
+                </tr>
+                <tr>
+                    <td>Domingos</td>
+                    <td>Cerrado</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
 
 @code {
-    private List<Usuario> usuarios;
 
-    protected override async Task OnInitializedAsync()
-    {
-        usuarios = await userService.ObtenerUsuarios();
-    }
 }

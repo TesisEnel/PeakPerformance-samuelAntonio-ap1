@@ -1,0 +1,55 @@
+﻿
+CSS HORARIO
+
+.navbar-dark {
+    background-color: #000000 !important;
+}
+
+.card {
+    margin-top: 20px;
+}
+
+.navbar {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+    background-color: #000000 !important;
+}
+
+.page-specific .navbar {
+    height: 80px;
+}
+
+.schedule-container {
+    margin: 2rem;
+}
+
+.schedule-table {
+    margin-top: 1rem;
+}
+
+    .schedule-table table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .schedule-table th,
+    .schedule-table td {
+        padding: 1rem;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    .schedule-table th {
+        background-color: #000000;
+        color: white;
+    }
+
+    .schedule-table td {
+        background-color: #f8f9fa;
+    }
