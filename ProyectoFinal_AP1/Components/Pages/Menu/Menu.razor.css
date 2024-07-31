@@ -6,7 +6,7 @@
 }
 
     .page-specific .navbar {
-        background-color: #000000;
+        height: 80px;
     }
 
     .page-specific .menu-container {
@@ -26,14 +26,26 @@
     .page-specific .nav-link,
     .page-specific .dropdown-menu,
     .page-specific .dropdown-item {
-        color: #FFFFFF; 
+        color: #FFFFFF;
     }
 
-    
+
     .page-specific .dropdown-menu {
-        background-color: #000000; 
+        background-color: #000000;
     }
 
     .page-specific .dropdown-item:hover {
         background-color: #333333;
     }
+
+.navbar {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+    background-color: #000000 !important;
+}

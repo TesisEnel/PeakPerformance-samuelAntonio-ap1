@@ -4,61 +4,49 @@
 @rendermode InteractiveServer
 @using SuscripcionModel = ProyectoFinal_AP1.Models.Suscripcion
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Suscripciones</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Productos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Suscripcion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Carrito</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">.</a>
-                </li>
-            </ul>
-            <form class="d-flex">
-                <div class="dropdown">
-                    <a href="#" class="nav-link text-light" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <li><a class="dropdown-item" href="/Perfil">Editar Perfil</a></li>
-                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
-                    </ul>
-                </div>
-            </form>
-        </div>
-    </div>
-</nav>
-
-<div class="pricing-cards">
-    @foreach (var suscripcion in suscripciones)
-    {
-        <div class="pricing-card">
-            <div class="header">
-                <h2>@suscripcion.Descripcion</h2>
-                <img src="data:image/png;base64,@Convert.ToBase64String(suscripcion.FotoPerfil)" alt="Foto de la Suscripción" class="trainer-photo" />
-                <p>@suscripcion.Descripcion</p>
+<div class="page-specific">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Proyecto_AP1</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                </ul>
+                <form class="d-flex">
+                    <div class="dropdown">
+                        <a href="#" class="nav-link text-light" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="/Perfil">Editar Perfil</a></li>
+                            <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </form>
             </div>
-            <ul class="features">
-              
-            </ul>
-            <button  class="price-btn" @onclick="Pagar">$@suscripcion.Precio</button>
-
         </div>
-    }
+    </nav>
+</div>
+
+<div class="container mt-5">
+    <div class="pricing-cards">
+        @foreach (var suscripcion in suscripciones)
+        {
+            <div class="pricing-card">
+                <div class="header">
+                    <h2>@suscripcion.Descripcion</h2>
+                    <img src="data:image/png;base64,@Convert.ToBase64String(suscripcion.FotoPerfil)" alt="Foto de la Suscripción" class="trainer-photo" />
+                    <p>Plan @suscripcion.Descripcion</p>
+                </div>
+                <ul class="features">
+                </ul>
+                <button class="price-btn" @onclick="Pagar">$@suscripcion.Precio</button>
+
+            </div>
+        }
+    </div>
 </div>
 <button class="btn btn-primary" @onclick="Ir">+</button>
 <button class="btn btn-primary" @onclick="Comparacion">Comparar</button>
@@ -73,7 +61,7 @@
 
     public void Pagar()
     {
-       
+
         Navigation.NavigateTo("/Pago");
     }
 
