@@ -12,7 +12,9 @@ public class AppDBContext : DbContext
     public DbSet<Suscripcion> Suscripciones { get; set; }
     public DbSet<Entrenador> Entrenadores { get; set; }
 
-    
+    public DbSet<Producto> Productos { get; set; }
+
+    public DbSet<Equipos> Equipos { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

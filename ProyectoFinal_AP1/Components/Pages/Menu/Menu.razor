@@ -5,20 +5,24 @@
 <div class="page-specific">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Proyecto_AP1</a>
+           
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <i class="fas fa-bars" style="color: white;"></i>
             </button>
+           
+            <a class="navbar-brand ms-2" href="#">
+                <img src="Images/GYM3.png" alt="Logo" style="height: 40px;">
+            </a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 </ul>
-                <form class="d-flex">
+                <form class="d-flex ms-auto">
                     <div class="dropdown">
                         <a href="#" class="nav-link text-light" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user"></i>
+                            <i class="fas fa-bars"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="/Perfil">Editar Perfil</a></li>
+                            <li><a class="dropdown-item" href="/MenuAdmin">Admin</a></li>
                             <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
                         </ul>
                     </div>
@@ -34,7 +38,6 @@
         <MenuCard Title="Productos" ImageSrc="Images/producto.png" Link="/Productos" />
         <MenuCard Title="Equipos" ImageSrc="Images/equipos.png" Link="/Equipos" />
         <MenuCard Title="Horario" ImageSrc="Images/calendario.png" Link="/Horario" />
-        <MenuCard Title="Clientes" ImageSrc="Images/registrado.png" Link="/Usuarios" />
         <MenuCard Title="Soporte" ImageSrc="Images/soporte.png" Link="/Soporte" />
 
 

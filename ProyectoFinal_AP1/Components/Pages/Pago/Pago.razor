@@ -2,45 +2,33 @@
 
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Suscripciones</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Productos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Suscripcion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Carrito</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">.</a>
-                </li>
-            </ul>
-            <form class="d-flex">
-                <div class="dropdown">
-                    <a href="#" class="nav-link text-light" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                        <li><a class="dropdown-item" href="/Perfil">Editar Perfil</a></li>
-                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
-                    </ul>
-                </div>
-            </form>
+<div class="page-specific">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Proyecto_AP1</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                </ul>
+                <form class="d-flex">
+                    <div class="dropdown">
+                        <a href="#" class="nav-link text-light" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="/Perfil">Editar Perfil</a></li>
+                            <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
         </div>
+    </nav>
     </div>
-</nav>
 
+    <div class="container mt-5">
 <div class="payment-container">
     <div class="payment-form">
         <div class="form-group">
@@ -88,10 +76,8 @@
         <img src="Images/tarjeta.png" alt="Ayuda Visual" class="img-fluid" />
     </div>
 </div>
+</div>
 
-<style>
-    
-</style>
 
 @code {
     private string CardholderName { get; set; }
@@ -109,7 +95,7 @@
     {
         if (AcceptTerms)
         {
-            // Lógica para procesar el pago
+           
             Console.WriteLine("Pago enviado");
         }
         else

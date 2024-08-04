@@ -15,6 +15,7 @@ public class AutorizacionService
 
     public async Task<Usuario> Authenticate(string email, string password)
     {
-        return await _context.Usuarios.SingleOrDefaultAsync(u => u.Correo == email && u.Clave == password);
+        return await _context.Usuarios.SingleOrDefaultAsync(u => u.Correo == email);
+        
     }
 }

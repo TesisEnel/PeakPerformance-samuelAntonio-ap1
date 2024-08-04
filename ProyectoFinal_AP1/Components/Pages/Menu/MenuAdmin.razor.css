@@ -1,0 +1,51 @@
+﻿.page-specific {
+    background-color: #FFFFFF;
+    color: #FFFFFF;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+    .page-specific .navbar {
+        height: 80px;
+    }
+
+    .page-specific .menu-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 20px;
+    }
+
+    .page-specific * {
+        border-color: #000000;
+    }
+
+    .page-specific .navbar,
+    .page-specific .menu-container,
+    .page-specific .navbar-brand,
+    .page-specific .nav-link,
+    .page-specific .dropdown-menu,
+    .page-specific .dropdown-item {
+        color: #FFFFFF;
+    }
+
+
+    .page-specific .dropdown-menu {
+        background-color: #000000;
+    }
+
+    .page-specific .dropdown-item:hover {
+        background-color: #333333;
+    }
+
+.navbar {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+    background-color: #000000 !important;
+}

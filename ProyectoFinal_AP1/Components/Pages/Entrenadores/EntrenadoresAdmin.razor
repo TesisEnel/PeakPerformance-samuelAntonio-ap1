@@ -1,6 +1,8 @@
-﻿@page "/Horario"
-@inject NavigationManager Navigation
+﻿@page "/EntrenadoresAdmin"
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
 
+@inject EntrenadorService entrenadorService
 <div class="page-specific">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -27,37 +29,33 @@
     </nav>
 </div>
 
-<div class="schedule-container mt-5">
-
-    <div class="schedule-table">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Día</th>
-                    <th>Horario</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Lunes a Viernes</td>
-                    <td>5:30 AM - 10:00 PM</td>
-                </tr>
-                <tr>
-                    <td>Sábados</td>
-                    <td>5:30 AM - 4:00 PM</td>
-                </tr>
-                <tr>
-                    <td>Domingos</td>
-                    <td>Cerrado</td>
-                </tr>
-            </tbody>
-        </table>
+<div class="container mt-5">
+    <div class="trainer-cards">
+        @foreach (var entrenador in entrenadores)
+        {
+            <div class="trainer-card">
+                <img src="data:image/png;base64,@Convert.ToBase64String(entrenador.FotoPerfil)" alt="Foto del Entrenador" class="trainer-photo" />
+                <h4>@entrenador.Nombre </h4>
+                <p>@entrenador.Nivel</p>
+            </div>
+        }
     </div>
 </div>
 
+<button class="btn btn-primary" @onclick="Ir">+</button>
 
 
 
 @code {
+    private List<Entrenador> entrenadores = new List<Entrenador>();
 
+    protected override async Task OnInitializedAsync()
+    {
+        entrenadores = await entrenadorService.ObtenerEntrenadores();
+    }
+
+    private void Ir()
+    {
+        NavigationManager.NavigateTo("/AgregarEntrenador");
+    }
 }

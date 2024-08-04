@@ -1,4 +1,4 @@
-﻿@page "/Suscripcion"
+﻿@page "/SuscripcionAdmin"
 @inject NavigationManager Navigation
 @inject ProyectoFinal_AP1.Services.SuscripcionService SuscripcionService
 @rendermode InteractiveServer
@@ -48,6 +48,7 @@
         }
     </div>
 </div>
+<button class="btn btn-primary" @onclick="Ir">+</button>
 <button class="btn btn-primary" @onclick="Comparacion">Comparar</button>
 
 @code {
@@ -64,9 +65,12 @@
         Navigation.NavigateTo("/Pago");
     }
 
-   
+    private void Ir()
+    {
+        Navigation.NavigateTo("/AgregarSuscripcion");
+    }
     private void Comparacion()
     {
         Navigation.NavigateTo("/Comparacion");
     }
-}
+    }

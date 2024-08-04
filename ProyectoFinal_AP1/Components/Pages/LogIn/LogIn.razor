@@ -4,7 +4,7 @@
 @rendermode InteractiveServer
 
 <div class="loginBox">
-    <img class="user" src="Images/usuario.png" alt="Foto del Usuario" height="100px" width="100px">
+    <img class="user" src="Images/GYM3.png" alt="Foto del Usuario" height="100px" width="100px">
     <h3>Iniciar Sesi&oacute;n</h3>
 
     <EditForm Model="login" OnValidSubmit="HandleValidSubmit">
@@ -28,13 +28,13 @@
     private async Task HandleValidSubmit()
     {
         var user = await autorizacionService.Authenticate(login.Correo, login.Clave);
-        if(user != null)
+        if (user != null)
         {
             navigationManager.NavigateTo("/Menu");
         }
         else
         {
-            
+
         }
     }
 
