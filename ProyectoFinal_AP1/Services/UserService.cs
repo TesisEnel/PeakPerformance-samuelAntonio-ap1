@@ -15,10 +15,10 @@ public class UserService
 
     public async Task<bool> RegisterUser(Usuario usuario)
     {
-      
+
         if (await _context.Usuarios.AnyAsync(u => u.Correo == usuario.Correo))
         {
-            return false; 
+            return false;
         }
 
         _context.Usuarios.Add(usuario);
@@ -33,5 +33,36 @@ public class UserService
     public async Task<Usuario> GetUserByEmailAsync(string email)
     {
         return await _context.Usuarios.FirstOrDefaultAsync(u => u.Correo == email);
+    }
+   
+    public async Task<Usuario?> GetUserByIdAsync(int userId)
+    {
+        return await _context.Usuarios.FindAsync(userId);
+    }
+
+    public async Task<bool> ActualizarUsuario(Usuario usuario)
+    {
+        var usuarioExistente = await _context.Usuarios.FindAsync(usuario.IdUsuario);
+        if (usuarioExistente == null)
+        {
+            return false;
+        }
+
+        usuarioExistente.Nombre = usuario.Nombre;
+        usuarioExistente.Apellido = usuario.Apellido;
+        usuarioExistente.Genero = usuario.Genero;
+        usuarioExistente.Correo = usuario.Correo;
+        usuarioExistente.Clave = usuario.Clave;
+        usuarioExistente.Telefono = usuario.Telefono;
+        usuarioExistente.Direccion = usuario.Direccion;
+        usuarioExistente.Estado = usuario.Estado;
+        usuarioExistente.FotoPerfil = usuario.FotoPerfil;
+        usuarioExistente.IdSuscripcion = usuario.IdSuscripcion;
+        usuarioExistente.IdEntrenador = usuario.IdEntrenador;
+
+        _context.Usuarios.Update(usuarioExistente);
+        await _context.SaveChangesAsync();
+
+        return true;
     }
 }

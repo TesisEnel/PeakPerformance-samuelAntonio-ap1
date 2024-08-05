@@ -1,0 +1,125 @@
+﻿@page "/Inscribir/{IdUsuario:int}"
+@inject SuscripcionService suscripcionService
+@inject EntrenadorService entrenadorService
+@inject UserService userService
+@inject NavigationManager navigationManager
+@rendermode InteractiveServer
+
+<EditForm Model="Usuario" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+
+    <div class="card shadow-lg border-0 rounded" style="background-color: #f8f9fa;">
+        <div class="card-header bg-primary text-white" style="text-align: center;">
+            <h3><i class="fas fa-clipboard-list"></i> Inscribir Cliente</h3>
+
+
+        </div>
+        <div class="card-body">
+            
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    @if (Usuario.FotoPerfil != null)
+                    {
+                        <img src="data:image/png;base64,@Convert.ToBase64String(Usuario.FotoPerfil)" alt="Foto de Perfil" width="100" height="100" class="rounded-circle float-right" />
+                    }
+                    </div>
+                <div class="col-md-3 mb-3">
+                    <label for="Suscripcion" class="form-label">Seleccione la Suscripcion:</label>
+                    <select @bind="SuscripcionSeleccionado" class="form-select">
+                        @foreach (var suscripcion in ListaSuscripciones)
+                        {
+                            <option value="@suscripcion.IdSuscripcion">@suscripcion.Descripcion</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label for="Entrenador" class="form-label">Seleccione el Entrenador:</label>
+                    <select @bind="EntrenadorSeleccionado" class="form-select">
+                        @foreach (var entrenador in ListaEntrenadores)
+                        {
+                            <option value="@entrenador.IdEntrenador">@entrenador.Nombre</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="Nombre" class="form-label">Nombre</label>
+                <InputText @bind-Value="Usuario.Nombre" class="form-control" readonly />
+                <ValidationMessage For="@(() => Usuario.Nombre)" />
+            </div>
+
+            <div class="mb-3">
+                <label for="Apellido" class="form-label">Apellido</label>
+                <InputText @bind-Value="Usuario.Apellido" class="form-control" readonly />
+                <ValidationMessage For="@(() => Usuario.Apellido)" />
+            </div>
+            <div class="mb-3">
+                <label for="Genero" class="form-label">Genero</label>
+                <InputText @bind-Value="Usuario.Genero" class="form-control" readonly />
+                <ValidationMessage For="@(() => Usuario.Telefono)" />
+            </div>
+
+            <div class="mb-3">
+                <label for="Direccion" class="form-label">Direccion</label>
+                <InputText @bind-Value="Usuario.Direccion" class="form-control" readonly />
+                <ValidationMessage For="@(() => Usuario.Direccion)" />
+            </div>
+
+            <div class="mb-3">
+                <label for="Telefono" class="form-label">Telefono</label>
+                <InputText @bind-Value="Usuario.Telefono" class="form-control" readonly />
+                <ValidationMessage For="@(() => Usuario.Telefono)" />
+            </div>
+
+        </div>
+        <div class="card-footer bg-light d-flex justify-content-center mt-3">
+            <div class="btn-group">
+               
+                @*Boton Guardar*@
+                <button type="submit" class="btn btn-outline-success ml-2"><span class="bi bi-check-circle-fill"></span> Guardar</button>
+                @*Boton Retroceder*@
+                <a type="button" href="/Usuarios" class="btn btn-outline-danger"><span class="bi bi-arrow-bar-left"></span> Retroceder</a>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+    [Parameter]
+    public int IdUsuario { get; set; }
+
+    public Usuario Usuario { get; set; } = new Usuario();
+    public List<Suscripcion> ListaSuscripciones = new List<Suscripcion>();
+    public List<Entrenador> ListaEntrenadores = new List<Entrenador>();
+    public int SuscripcionSeleccionado { get; set; }
+    public int EntrenadorSeleccionado { get; set; }
+    public int? usuarioId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+   
+    {
+        Usuario = await userService.GetUserByIdAsync(IdUsuario);
+        ListaSuscripciones = suscripcionService.Listar(c => true);
+        ListaEntrenadores = entrenadorService.Listar(c => true);
+
+        SuscripcionSeleccionado = Usuario.IdSuscripcion ?? 0;
+        EntrenadorSeleccionado = Usuario.IdEntrenador ?? 0;
+    }
+
+    public async Task Guardar()
+    {
+        Usuario.IdSuscripcion = SuscripcionSeleccionado;
+        Usuario.IdEntrenador = EntrenadorSeleccionado;
+        Usuario.Estado = true;
+
+        await userService.ActualizarUsuario(Usuario);
+        navigationManager.NavigateTo("/Usuarios");
+    }
+
+    public void Nuevo()
+    {
+        Usuario = new Usuario();
+    }
+}

@@ -1,7 +1,8 @@
 ﻿@page "/Pago"
-
-
-
+@page "/Pago/{IdSuscripcion:int}"
+@inject NavigationManager Navigation
+@inject UserService userService
+@inject SuscripcionService suscripcionService
 <div class="page-specific">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -67,10 +68,10 @@
             <input type="text" id="phoneNumber" @bind="PhoneNumber" class="form-control" placeholder="Teléfono Celular" />
         </div>
         <div class="form-group">
-            <input type="checkbox" id="acceptTerms" @bind="AcceptTerms" />
-            <label for="acceptTerms">Acepto los términos y condiciones</label>
+         
+          
         </div>
-        <button @onclick="SubmitPayment" class="btn btn-primary">Pagar</button>
+            <button class="btn btn-primary">Pagar</button>
     </div>
     <div class="card-visual">
         <img src="Images/tarjeta.png" alt="Ayuda Visual" class="img-fluid" />
@@ -80,6 +81,15 @@
 
 
 @code {
+
+
+    [Parameter]
+    public int IdSuscripcion{ get; set; }
+
+    [Parameter]
+    public int IdUsuario { get; set; }
+
+    public Suscripcion? Suscripcion { get; set; }
     private string CardholderName { get; set; }
     private string DocumentType { get; set; } = "CC";
     private string DocumentNumber { get; set; }
@@ -91,16 +101,11 @@
     private string PhoneNumber { get; set; }
     private bool AcceptTerms { get; set; }
 
-    private void SubmitPayment()
+    protected override async Task OnInitializedAsync()
     {
-        if (AcceptTerms)
-        {
-           
-            Console.WriteLine("Pago enviado");
-        }
-        else
-        {
-            Console.WriteLine("Debe aceptar los términos y condiciones");
-        }
+        Suscripcion = await suscripcionService.Buscar(IdSuscripcion);
     }
+   
+
+
 }

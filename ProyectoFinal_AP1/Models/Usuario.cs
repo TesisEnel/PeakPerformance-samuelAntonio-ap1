@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using System.ComponentModel.DataAnnotations;
 
 namespace ProyectoFinal_AP1.Models;
 
@@ -17,6 +18,11 @@ public class Usuario
     public byte[] FotoPerfil { get; set; }
 
     public int? IdSuscripcion { get; set; }
-    public Suscripcion Suscripcion { get; set; }
+    public Suscripcion? Suscripcion { get; set; }
+
+    public int? IdEntrenador { get; set; }
+    public Entrenador? Entrenador { get; set; }
+  
+
 
 }

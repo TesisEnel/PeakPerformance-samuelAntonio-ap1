@@ -1,5 +1,4 @@
 ﻿@page "/SignUp"
-
 @inject UserService userService
 @inject NavigationManager navigationManager
 @rendermode InteractiveServer
@@ -38,9 +37,9 @@
     {
        
 
-        bool isRegistered = await userService.RegisterUser(Usuario);
+        bool guardo = await userService.RegisterUser(Usuario);
 
-        if (isRegistered)
+        if (guardo)
         {
             navigationManager.NavigateTo("/");
         }

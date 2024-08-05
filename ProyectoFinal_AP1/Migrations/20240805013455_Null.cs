@@ -5,7 +5,7 @@
 namespace ProyectoFinal_AP1.Migrations
 {
     /// <inheritdoc />
-    public partial class AddNull : Migration
+    public partial class Null : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

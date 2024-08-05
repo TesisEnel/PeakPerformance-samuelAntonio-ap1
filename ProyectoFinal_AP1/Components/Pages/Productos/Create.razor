@@ -1,18 +1,17 @@
-﻿@page "/Equipos"
+﻿@page "/AgregarProducto"
+
 @inject NavigationManager NavigationManager
 @rendermode InteractiveServer
-
-@inject EquipoService equipoService
-@using EquipoModel = ProyectoFinal_AP1.Models.Equipos
+@inject ProductoService productoService
 
 <div class="page-specific">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-
+           
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars" style="color: white;"></i>
             </button>
-
+           
             <a class="navbar-brand ms-2" href="#">
                 <img src="Images/LogoNombre.png" alt="Logo" style="height: 40px;">
             </a>
@@ -33,28 +32,49 @@
             </div>
         </div>
     </nav>
-</div>
-
-<div class="container mt-5">
-    <div class="trainer-cards">
-        @foreach (var equipo in equipos)
-        {
-            <div class="trainer-card">
-                <img src="data:image/png;base64,@Convert.ToBase64String(equipo.Foto)" alt="Foto del Entrenador" class="trainer-photo" />
-                <h4>@equipo.Descripcion </h4>
-                <p>Tipo: @equipo.Tipo</p>
-                
-            </div>
-        }
     </div>
-</div>
+<EditForm Model="nuevoProducto" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="nombre">Descripcion</label>
+        <InputText id="nombre" class="form-control" @bind-Value="nuevoProducto.Descripcion" />
+    </div>
+
+    <div class="form-group">
+        <label for="nombre">Precio</label>
+        <InputNumber id="nombre" class="form-control" @bind-Value="nuevoProducto.Precio" />
+    </div>
+
+    <div class="form-group">
+        <label for="nombre">Stock</label>
+        <InputNumber id="nombre" class="form-control" @bind-Value="nuevoProducto.Stock" />
+    </div>
+
+
+    <div class="form-group">
+        <label for="fotoPerfil">Foto de Perfil</label>
+        <InputFile id="fotoPerfil" OnChange="CargarFotoPerfil" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</EditForm>
 
 @code {
+    private Producto nuevoProducto = new Producto();
 
-    private List<EquipoModel> equipos = new List<EquipoModel>();
-
-    protected override async Task OnInitializedAsync()
+    private async Task CargarFotoPerfil(InputFileChangeEventArgs e)
     {
-        equipos = await equipoService.GetEquipoosAsync ();
+        var file = e.File;
+        var buffer = new byte[file.Size];
+        await file.OpenReadStream().ReadAsync(buffer);
+        nuevoProducto.Foto = buffer;
+    }
+
+    private async Task Guardar()
+    {
+        await productoService.GuardarAsync(nuevoProducto);
+        NavigationManager.NavigateTo("/ProductosAdmin");
     }
 }

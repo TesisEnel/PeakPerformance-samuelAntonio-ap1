@@ -1,4 +1,7 @@
-﻿@page "/Soporte"
+﻿@page "/EquiposAdmin"
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+<h3>EquiposAdmin</h3>
 <div class="page-specific">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -28,30 +31,10 @@
         </div>
     </nav>
     </div>
-<div class="support-container">
-    <h2>Contacta con Soporte</h2>
-    <div class="contact-info">
-        <div class="contact-item">
-            <i class="fas fa-envelope"></i>
-            <div class="contact-details">
-                <h4>Correo Electrónico</h4>
-                <p>adielgarcia@gmail.com</p>
-            </div>
-        </div>
-        <div class="contact-item">
-            <i class="fas fa-phone"></i>
-            <div class="contact-details">
-                <h4>Teléfono</h4>
-                <p>809-512-4124</p>
-            </div>
-        </div>
-        <div class="contact-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <div class="contact-details">
-                <h4>Dirección</h4>
-                <p>San Francisco</p>
-            </div>
-        </div>
-    </div>
-</div>
-
+<button class="btn btn-primary" @onclick="Ir">+</button>
+@code {
+    private void Ir()
+    {
+        Navigation.NavigateTo("/AgregarEquipo");
+    }
+}

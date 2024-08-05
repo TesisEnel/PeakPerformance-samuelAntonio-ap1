@@ -1,4 +1,9 @@
-﻿@page "/Soporte"
+﻿@page "/AgregarEquipo"
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+@inject EquipoService equipoService
+@using EquipoModel = ProyectoFinal_AP1.Models.Equipos
+
 <div class="page-specific">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -28,30 +33,44 @@
         </div>
     </nav>
     </div>
-<div class="support-container">
-    <h2>Contacta con Soporte</h2>
-    <div class="contact-info">
-        <div class="contact-item">
-            <i class="fas fa-envelope"></i>
-            <div class="contact-details">
-                <h4>Correo Electrónico</h4>
-                <p>adielgarcia@gmail.com</p>
-            </div>
-        </div>
-        <div class="contact-item">
-            <i class="fas fa-phone"></i>
-            <div class="contact-details">
-                <h4>Teléfono</h4>
-                <p>809-512-4124</p>
-            </div>
-        </div>
-        <div class="contact-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <div class="contact-details">
-                <h4>Dirección</h4>
-                <p>San Francisco</p>
-            </div>
-        </div>
-    </div>
-</div>
+<EditForm Model="nuevoEquipo" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
 
+    <div class="form-group">
+        <label for="nombre">Descripcion</label>
+        <InputText id="nombre" class="form-control" @bind-Value="nuevoEquipo.Descripcion" />
+    </div>
+
+    <div class="form-group">
+        <label for="nombre">Precio</label>
+        <InputText id="nombre" class="form-control" @bind-Value="nuevoEquipo.Tipo" />
+    </div>
+
+
+
+    <div class="form-group">
+        <label for="fotoPerfil">Foto de Perfil</label>
+        <InputFile id="fotoPerfil" OnChange="CargarFotoPerfil" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</EditForm>
+
+@code {
+    private EquipoModel nuevoEquipo = new EquipoModel();
+
+    private async Task CargarFotoPerfil(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        var buffer = new byte[file.Size];
+        await file.OpenReadStream().ReadAsync(buffer);
+        nuevoEquipo.Foto = buffer;
+    }
+
+    private async Task Guardar()
+    {
+        await equipoService.GuardarAsync(nuevoEquipo);
+        NavigationManager.NavigateTo("/ProductosAdmin");
+    }
+}

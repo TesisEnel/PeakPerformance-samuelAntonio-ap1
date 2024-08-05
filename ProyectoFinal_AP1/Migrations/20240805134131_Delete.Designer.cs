@@ -12,8 +12,8 @@ using ProyectoFinal_AP1.DAL;
 namespace ProyectoFinal_AP1.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20240728014418_UsuarioEstado")]
-    partial class UsuarioEstado
+    [Migration("20240805134131_Delete")]
+    partial class Delete
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,6 +54,58 @@ namespace ProyectoFinal_AP1.Migrations
                     b.ToTable("Entrenadores");
                 });
 
+            modelBuilder.Entity("ProyectoFinal_AP1.Models.Equipos", b =>
+                {
+                    b.Property<int>("IdEquipo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEquipo"));
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Foto")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdEquipo");
+
+                    b.ToTable("Equipos");
+                });
+
+            modelBuilder.Entity("ProyectoFinal_AP1.Models.Producto", b =>
+                {
+                    b.Property<int>("IdProducto")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProducto"));
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Foto")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<int>("Precio")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
+                    b.HasKey("IdProducto");
+
+                    b.ToTable("Productos");
+                });
+
             modelBuilder.Entity("ProyectoFinal_AP1.Models.Suscripcion", b =>
                 {
                     b.Property<int>("IdSuscripcion")
@@ -71,6 +123,10 @@ namespace ProyectoFinal_AP1.Migrations
 
                     b.Property<DateTime>("FechaInicio")
                         .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("FotoPerfil")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<int?>("IdEntrenador")
                         .HasColumnType("int");
@@ -117,7 +173,6 @@ namespace ProyectoFinal_AP1.Migrations
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Genero")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("IdSuscripcion")

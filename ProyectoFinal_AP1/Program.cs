@@ -23,7 +23,8 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<AutorizacionService>();
 builder.Services.AddScoped<EntrenadorService>();
 builder.Services.AddScoped<SuscripcionService>();
-
+builder.Services.AddScoped<ProductoService>();
+builder.Services.AddScoped<EquipoService>();
 var app = builder.Build();
 
 

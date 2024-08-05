@@ -25,9 +25,18 @@ public class AppDBContext : DbContext
             .WithOne()
             .HasForeignKey<Usuario>(u => u.IdSuscripcion);
 
+        modelBuilder.Entity<Usuario>()
+       .HasOne(u => u.Entrenador)
+       .WithMany()
+       .HasForeignKey(u => u.IdEntrenador);
+
         modelBuilder.Entity<Suscripcion>()
             .HasOne(s => s.Entrenador)
             .WithMany()
             .HasForeignKey(s => s.IdEntrenador);
+
+        modelBuilder.Entity<Usuario>().HasKey(u => u.IdUsuario);
+        modelBuilder.Entity<Suscripcion>().HasKey(s => s.IdSuscripcion);
+        modelBuilder.Entity<Entrenador>().HasKey(e => e.IdEntrenador);
     }
 }

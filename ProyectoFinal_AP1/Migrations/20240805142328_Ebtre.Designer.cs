@@ -12,8 +12,8 @@ using ProyectoFinal_AP1.DAL;
 namespace ProyectoFinal_AP1.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20240804011147_Equipos")]
-    partial class Equipos
+    [Migration("20240805142328_Ebtre")]
+    partial class Ebtre
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,6 +52,31 @@ namespace ProyectoFinal_AP1.Migrations
                     b.HasKey("IdEntrenador");
 
                     b.ToTable("Entrenadores");
+                });
+
+            modelBuilder.Entity("ProyectoFinal_AP1.Models.Equipos", b =>
+                {
+                    b.Property<int>("IdEquipo")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEquipo"));
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Foto")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("IdEquipo");
+
+                    b.ToTable("Equipos");
                 });
 
             modelBuilder.Entity("ProyectoFinal_AP1.Models.Producto", b =>
@@ -150,6 +175,9 @@ namespace ProyectoFinal_AP1.Migrations
                     b.Property<string>("Genero")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("IdEntrenador")
+                        .HasColumnType("int");
+
                     b.Property<int?>("IdSuscripcion")
                         .HasColumnType("int");
 
@@ -162,6 +190,8 @@ namespace ProyectoFinal_AP1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("IdUsuario");
+
+                    b.HasIndex("IdEntrenador");
 
                     b.HasIndex("IdSuscripcion")
                         .IsUnique()
@@ -181,9 +211,15 @@ namespace ProyectoFinal_AP1.Migrations
 
             modelBuilder.Entity("ProyectoFinal_AP1.Models.Usuario", b =>
                 {
+                    b.HasOne("ProyectoFinal_AP1.Models.Entrenador", "Entrenador")
+                        .WithMany()
+                        .HasForeignKey("IdEntrenador");
+
                     b.HasOne("ProyectoFinal_AP1.Models.Suscripcion", "Suscripcion")
                         .WithOne()
                         .HasForeignKey("ProyectoFinal_AP1.Models.Usuario", "IdSuscripcion");
+
+                    b.Navigation("Entrenador");
 
                     b.Navigation("Suscripcion");
                 });
