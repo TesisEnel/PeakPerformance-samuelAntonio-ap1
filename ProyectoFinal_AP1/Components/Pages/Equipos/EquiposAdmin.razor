@@ -1,7 +1,7 @@
 ﻿@page "/EquiposAdmin"
 @inject NavigationManager Navigation
 @rendermode InteractiveServer
-<h3>EquiposAdmin</h3>
+
 <div class="page-specific">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -31,7 +31,9 @@
         </div>
     </nav>
     </div>
+    <div class="container mt-5">
 <button class="btn btn-primary" @onclick="Ir">+</button>
+</div>
 @code {
     private void Ir()
     {

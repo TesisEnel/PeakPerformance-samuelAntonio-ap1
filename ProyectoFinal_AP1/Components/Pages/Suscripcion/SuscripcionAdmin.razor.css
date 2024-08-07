@@ -13,7 +13,7 @@
     margin: 15px;
     padding: 20px;
     transition: transform 0.2s;
-    text-align: center; /* Asegura que todo el contenido esté centrado */
+    text-align: center; 
 }
 
     .pricing-card:hover {

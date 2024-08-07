@@ -1,62 +1,49 @@
-﻿@page "/Perfil"
+﻿@page "/Perfil/{IdUsuario:int}"
+@inject NavigationManager Navigation
+@inject UserService userService
 
-
-@inject AutorizacionService AutorizacionService
-@inject NavigationManager NavigationManager
-
-
-<div class="profile-container" style="margin-top: 50px;">
-    <div class="card">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-3 text-center">
-                    <img src="data:image/png;base64,@Convert.ToBase64String(usuario?.FotoPerfil)" class="rounded-circle img-fluid" alt="Foto del Usuario" />
-                    <h6>Fotografía</h6>
-                    <button class="btn btn-primary">Cambiar</button>
-                    <a href="#" class="d-block mt-2">¿Cambiar mi contraseña?</a>
-                </div>
-                <div class="col-md-9">
-                    <h5>Datos del Usuario</h5>
-                    <form>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="Nombre" class="form-label">Nombres</label>
-                                <input type="text" class="form-control" id="Nombre" value="@usuario?.Nombre" readonly>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="Apellidos" class="form-label">Apellidos</label>
-                                <input type="text" class="form-control" id="apellidos" value="@usuario?.Apellido" readonly>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="Email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="Email" value="@usuario?.Correo" readonly>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="telefono" class="form-label">Teléfono</label>
-                                <input type="text" class="form-control" id="telefono" value="@usuario?.Telefono" readonly>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-md-12">
-                                <label for="direccion" class="form-label">Dirección</label>
-                                <textarea class="form-control" id="direccion" rows="2" readonly>@usuario?.Direccion</textarea>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-success">Guardar</button>
-                    </form>
-                </div>
+<EditForm Model="usuario" OnValidSubmit="HandleValidSubmit">
+    <div class="card shadow-lg border-0 rounded" style="background-color: #f8f9fa;">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h3>Datos personales</h3>
+            <div>
+                <img src="data:image/png;base64,@Convert.ToBase64String(usuario.FotoPerfil)" alt="Foto de Perfil" class="rounded-circle" width="100" height="100" />
+                <button type="button" class="btn btn-primary mt-2">Cambiar</button>
+                <a href="#" class="d-block mt-2">¿Cambiar mi contraseña?</a>
             </div>
         </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="nombre" class="form-label">Nombres</label>
+                    <InputText id="nombre" class="form-control" @bind-Value="usuario.Nombre" readonly />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="apellido" class="form-label">Apellidos</label>
+                    <InputText id="apellido" class="form-control" @bind-Value="usuario.Apellido" readonly />
+                </div>
+               
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <button type="submit" class="btn btn-success">Guardar</button>
+        </div>
     </div>
-</div>
-@code {
-    private Usuario usuario;
+    </div>
+</EditForm>
 
+@code {
+   
+    [Parameter]
+    public int IdUsuario { get; set; }
+    private Usuario usuario = new Usuario();
     protected override async Task OnInitializedAsync()
     {
-        var email = "usuario@example.com";
+        usuario = await userService.GetUserByIdAsync(IdUsuario);
 
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        
     }
 }

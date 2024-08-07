@@ -1,5 +1,5 @@
 ﻿@page "/MenuAdmin"
-
+@inject UserService userService
 <div class="page-specific">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -36,7 +36,7 @@
     <MenuCard Title="Entrenadores" ImageSrc="Images/entrenador.png" Link="/EntrenadoresAdmin" />
     <MenuCard Title="Productos" ImageSrc="Images/producto.png" Link="/ProductosAdmin" />
     <MenuCard Title="Equipos" ImageSrc="Images/equipos.png" Link="/EquiposAdmin" />
-    <MenuCard Title="Clientes" ImageSrc="Images/registrado.png" Link="/Usuarios" />
+        <MenuCard Title="Clientes" ImageSrc="Images/registrado.png" Link="/Usuarios"/>
 
 
 
@@ -44,4 +44,11 @@
 </div>
 @code {
 
+    private int numeroUsuarios;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var usuarios = await userService.ObtenerUsuarios();
+        numeroUsuarios = usuarios.Count;
+    }
 }

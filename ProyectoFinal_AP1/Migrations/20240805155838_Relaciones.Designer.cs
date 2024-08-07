@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoFinal_AP1.DAL;
 
@@ -11,9 +12,11 @@ using ProyectoFinal_AP1.DAL;
 namespace ProyectoFinal_AP1.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240805155838_Relaciones")]
+    partial class Relaciones
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -153,9 +156,6 @@ namespace ProyectoFinal_AP1.Migrations
                     b.Property<string>("Clave")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Codigo")
-                        .HasColumnType("int");
 
                     b.Property<string>("Correo")
                         .IsRequired()

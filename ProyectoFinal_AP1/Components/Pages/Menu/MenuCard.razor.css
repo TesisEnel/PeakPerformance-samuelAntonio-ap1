@@ -13,7 +13,7 @@
 
     .menu-card a {
         text-decoration: none;
-        color: #000000; /* Texto blanco */
+        color: #000000;
     }
 
 .card-content {
@@ -29,10 +29,10 @@
 .card-content h3 {
     margin: 10px 0;
     font-size: 1.2em;
-    color: #000000; /* Título blanco */
+    color: #000000; 
 }
 
 .card-content p {
     font-size: 1em;
-    color: #ffffff; /* Texto blanco */
+    color: #ffffff; 
 }

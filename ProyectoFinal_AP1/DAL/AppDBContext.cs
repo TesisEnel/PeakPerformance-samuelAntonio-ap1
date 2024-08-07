@@ -18,21 +18,16 @@ public class AppDBContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
 
+        
         modelBuilder.Entity<Usuario>()
-            .HasOne(u => u.Suscripcion)
-            .WithOne()
-            .HasForeignKey<Usuario>(u => u.IdSuscripcion);
-
-        modelBuilder.Entity<Usuario>()
-       .HasOne(u => u.Entrenador)
-       .WithMany()
-       .HasForeignKey(u => u.IdEntrenador);
+            .HasOne(u => u.Entrenador)
+            .WithMany(e => e.Usuarios)
+            .HasForeignKey(u => u.IdEntrenador);
 
         modelBuilder.Entity<Suscripcion>()
             .HasOne(s => s.Entrenador)
-            .WithMany()
+            .WithMany(e => e.Suscripciones)
             .HasForeignKey(s => s.IdEntrenador);
 
         modelBuilder.Entity<Usuario>().HasKey(u => u.IdUsuario);

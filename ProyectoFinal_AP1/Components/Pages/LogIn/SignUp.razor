@@ -9,12 +9,21 @@
 
     <EditForm Model="Usuario" OnValidSubmit="HandleValidSubmit">
         <div class="inputBox">
-            <InputText id="nombre" type="text" @bind-Value="Usuario.Nombre" placeholder="Nombres" />
-            <InputText id="apellido" type="text" @bind-Value="Usuario.Apellido" placeholder="Apellidos" />
-            <InputText id="email" type="text" @bind-Value="Usuario.Correo" placeholder="Email" />
-            <InputText id="pass" type="password" @bind-Value="Usuario.Clave" placeholder="Contraseña" />
-            <InputText id="telefono" type="text" @bind-Value="Usuario.Telefono" placeholder="Telefono" />
-            <InputText id="direccion" type="text" @bind-Value="Usuario.Direccion" placeholder="Direccion" />
+            <InputText id="nombre" type="text" @bind-Value="Usuario.Nombre" class="form-control" placeholder="Nombres" />
+            <InputText id="apellido" type="text" @bind-Value="Usuario.Apellido" class="form-control" placeholder="Apellidos" />
+             <label for="genero">Género</label>
+
+        <select id="genero" @bind="Usuario.Genero" class="form-control">
+            <option value="">Seleccione el género</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+            <option value="Otro">Otro</option>
+        </select>
+
+            <InputText id="email" type="text" @bind-Value="Usuario.Correo" class="form-control" placeholder="Email" />
+            <InputText id="pass" type="password" @bind-Value="Usuario.Clave" class="form-control" placeholder="Contraseña" />
+            <InputText id="telefono" type="text" @bind-Value="Usuario.Telefono" class="form-control" placeholder="Telefono" />
+            <InputText id="direccion" type="text" @bind-Value="Usuario.Direccion" class="form-control" placeholder="Direccion" />
             <InputFile OnChange="HandleSelected" />
         </div>
         <button type="submit" class="btn-login">Crear Cuenta</button>
@@ -23,9 +32,9 @@
 
 @code {
     private Usuario Usuario = new Usuario();
- 
-    private IBrowserFile fotoPerfil;
 
+    private IBrowserFile fotoPerfil;
+    [Inject] protected ToastService toastService { get; set; }
     private async Task HandleSelected(InputFileChangeEventArgs e)
     {
         fotoPerfil = e.File;
@@ -35,18 +44,27 @@
     }
     private async Task HandleValidSubmit()
     {
-       
+
 
         bool guardo = await userService.RegisterUser(Usuario);
 
         if (guardo)
         {
             navigationManager.NavigateTo("/");
+            NotificacionGuardo();
         }
         else
         {
             
         }
+    }
+    public void NotificacionGuardo()
+    {
+        toastService.Notify(new(ToastType.Success, $"Se Creo la cuenta Correctamente."));
+    }
+    public void NotificacionError()
+    {
+        toastService.Notify(new(ToastType.Danger, $"Error al crear la cuenta."));
     }
 
 }

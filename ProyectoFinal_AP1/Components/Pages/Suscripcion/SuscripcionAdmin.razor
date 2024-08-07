@@ -46,14 +46,14 @@
                 </div>
                 <ul class="features">
                 </ul>
-                <button class="price-btn" @onclick="Pagar">$@suscripcion.Precio</button>
+          
 
             </div>
         }
     </div>
 </div>
 <button class="btn btn-primary" @onclick="Ir">+</button>
-<button class="btn btn-primary" @onclick="Comparacion">Comparar</button>
+
 
 @code {
     private List<SuscripcionModel> suscripciones = new List<SuscripcionModel>();
@@ -63,11 +63,7 @@
         suscripciones = await SuscripcionService.GetSuscripcionesAsync();
     }
 
-    public void Pagar()
-    {
-
-        Navigation.NavigateTo("/Pago");
-    }
+   
 
     private void Ir()
     {

@@ -1,7 +1,7 @@
 ﻿@page "/Usuarios"
 @inject UserService userService
 
-<h3>Usuarios Registrados</h3>
+
 
 
 
@@ -34,6 +34,7 @@
         </div>
     </nav>
 </div>
+<div class="container mt-5">
 
 @if (usuarios == null)
 {
@@ -54,6 +55,7 @@ else
                 <th>Teléfono</th>
                 <th>Dirección</th>
                 <th>Genero</th>
+                <th>Codigo</th>
                 <th>Suscripcion</th>
                 <th>Estado</th>
                 <th>Foto de Perfil</th>
@@ -69,6 +71,7 @@ else
                     <td>@usuario.Telefono</td>
                     <td>@usuario.Direccion</td>
                     <td>@usuario.Genero</td>
+                    <td>@usuario.Codigo</td>
                     <td>@usuario.IdSuscripcion</td>
                      <td>
                         @if (usuario.Estado)
@@ -89,8 +92,10 @@ else
                     </td>
 
                     <td>
-                        <a type="button" href="/Inscribir/@usuario.IdUsuario" class="btn btn-outline-success"><span class="bi bi-arrow-bar-left"></span> Inscribir </a>
-                            
+                        @if (!usuario.Estado)
+                        {
+                            <a type="button" href="/Inscribir/@usuario.IdUsuario" class="btn btn-outline-success"><span class="bi bi-arrow-bar-left"></span> Inscribir </a>
+                        }
                     </td>
                     
                 </tr>
@@ -98,7 +103,7 @@ else
         </tbody>
     </table>
 }
-
+</div>
 @code {
     private List<Usuario> usuarios;
 

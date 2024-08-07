@@ -15,7 +15,10 @@
     public bool IsActive { get; set; }
 
     [Parameter]
-    public string ImageSrc { get; set; } // New parameter for image source
+    public string ImageSrc { get; set; }
+
+    [Parameter]
+    public int Contador { get; set; } 
 }
 
 <div class="pricing-card @(IsActive ? "active" : "")">
@@ -41,6 +44,7 @@
     </div>
     <div class="card-footer">
         <button class="btn-profile">Ver Perfil</button>
+        <div class="user-count">Total de usuarios: @Contador</div> 
     </div>
 </div>
 
@@ -66,9 +70,14 @@
             z-index: 1;
         }
 
+    .user-count {
+        margin-top: 10px;
+        font-size: 1rem;
+        color: #333;
+    }
     .card-header {
         width: 100%;
-        height: 150px; /* Adjust height as needed */
+        height: 150px; 
         background-color: #f4f4f4;
         display: flex;
         align-items: center;

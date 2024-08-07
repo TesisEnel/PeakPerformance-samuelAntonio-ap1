@@ -12,6 +12,7 @@ public class Usuario
     public string? Genero { get; set; }
     public string Correo { get; set; }
     public string Clave { get; set; }
+    public int? Codigo { get; set; }
     public string Telefono { get; set; }
     public string Direccion { get; set; }
     public bool Estado { get; set; }
@@ -22,7 +23,7 @@ public class Usuario
 
     public int? IdEntrenador { get; set; }
     public Entrenador? Entrenador { get; set; }
-  
+
 
 
 }
