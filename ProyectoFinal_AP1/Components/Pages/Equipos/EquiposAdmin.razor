@@ -2,6 +2,8 @@
 @inject NavigationManager Navigation
 @rendermode InteractiveServer
 
+@inject EquipoService equipoService
+@using EquipoModel = ProyectoFinal_AP1.Models.Equipos
 <div class="page-specific">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -32,9 +34,28 @@
     </nav>
     </div>
     <div class="container mt-5">
-<button class="btn btn-primary" @onclick="Ir">+</button>
-</div>
+
+        <div class="trainer-cards">
+            @foreach (var equipo in equipos)
+            {
+                <div class="trainer-card">
+                    <img src="data:image/png;base64,@Convert.ToBase64String(equipo.Foto)" alt="Foto del Entrenador" class="trainer-photo" />
+                    <h4>@equipo.Descripcion </h4>
+                    <p>Tipo: @equipo.Tipo</p>
+
+                </div>
+            }
+        </div>
+    </div>
+<button class="btn btn-primary" @onclick="Ir">Agregar</button>
+
 @code {
+    private List<EquipoModel> equipos = new List<EquipoModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        equipos = await equipoService.GetEquipoosAsync();
+    }
     private void Ir()
     {
         Navigation.NavigateTo("/AgregarEquipo");
