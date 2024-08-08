@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoFinal_AP1.DAL;
@@ -12,42 +11,36 @@ using ProyectoFinal_AP1.DAL;
 namespace ProyectoFinal_AP1.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20240805142328_Ebtre")]
-    partial class Ebtre
+    [Migration("20240808133034_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.7");
 
             modelBuilder.Entity("ProyectoFinal_AP1.Models.Entrenador", b =>
                 {
                     b.Property<int>("IdEntrenador")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEntrenador"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<byte[]>("FotoPerfil")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("BLOB");
 
                     b.Property<string>("Genero")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Nivel")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("IdEntrenador");
 
@@ -58,21 +51,19 @@ namespace ProyectoFinal_AP1.Migrations
                 {
                     b.Property<int>("IdEquipo")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdEquipo"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<byte[]>("Foto")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("BLOB");
 
                     b.Property<string>("Tipo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("IdEquipo");
 
@@ -83,23 +74,21 @@ namespace ProyectoFinal_AP1.Migrations
                 {
                     b.Property<int>("IdProducto")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProducto"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<byte[]>("Foto")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("BLOB");
 
                     b.Property<int>("Precio")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Stock")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("IdProducto");
 
@@ -110,29 +99,28 @@ namespace ProyectoFinal_AP1.Migrations
                 {
                     b.Property<int>("IdSuscripcion")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdSuscripcion"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("FechaFin")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("FechaInicio")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<byte[]>("FotoPerfil")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("BLOB");
 
                     b.Property<int?>("IdEntrenador")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Precio")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("IdSuscripcion");
 
@@ -145,57 +133,69 @@ namespace ProyectoFinal_AP1.Migrations
                 {
                     b.Property<int>("IdUsuario")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdUsuario"));
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Apellido")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Clave")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("Codigo")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Correo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Direccion")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("Estado")
-                        .HasColumnType("bit");
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("FechaFinSuscripcion")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("FechaInicioSuscripcion")
+                        .HasColumnType("TEXT");
 
                     b.Property<byte[]>("FotoPerfil")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("BLOB");
 
                     b.Property<string>("Genero")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<int?>("IdEntrenador")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("IdSuscripcion")
-                        .HasColumnType("int");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("SuscripcionIdSuscripcion")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Telefono")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("IdUsuario");
 
                     b.HasIndex("IdEntrenador");
 
-                    b.HasIndex("IdSuscripcion")
-                        .IsUnique()
-                        .HasFilter("[IdSuscripcion] IS NOT NULL");
+                    b.HasIndex("SuscripcionIdSuscripcion");
 
                     b.ToTable("Usuarios");
                 });
@@ -203,7 +203,7 @@ namespace ProyectoFinal_AP1.Migrations
             modelBuilder.Entity("ProyectoFinal_AP1.Models.Suscripcion", b =>
                 {
                     b.HasOne("ProyectoFinal_AP1.Models.Entrenador", "Entrenador")
-                        .WithMany()
+                        .WithMany("Suscripciones")
                         .HasForeignKey("IdEntrenador");
 
                     b.Navigation("Entrenador");
@@ -212,16 +212,28 @@ namespace ProyectoFinal_AP1.Migrations
             modelBuilder.Entity("ProyectoFinal_AP1.Models.Usuario", b =>
                 {
                     b.HasOne("ProyectoFinal_AP1.Models.Entrenador", "Entrenador")
-                        .WithMany()
+                        .WithMany("Usuarios")
                         .HasForeignKey("IdEntrenador");
 
                     b.HasOne("ProyectoFinal_AP1.Models.Suscripcion", "Suscripcion")
-                        .WithOne()
-                        .HasForeignKey("ProyectoFinal_AP1.Models.Usuario", "IdSuscripcion");
+                        .WithMany("Usuarios")
+                        .HasForeignKey("SuscripcionIdSuscripcion");
 
                     b.Navigation("Entrenador");
 
                     b.Navigation("Suscripcion");
+                });
+
+            modelBuilder.Entity("ProyectoFinal_AP1.Models.Entrenador", b =>
+                {
+                    b.Navigation("Suscripciones");
+
+                    b.Navigation("Usuarios");
+                });
+
+            modelBuilder.Entity("ProyectoFinal_AP1.Models.Suscripcion", b =>
+                {
+                    b.Navigation("Usuarios");
                 });
 #pragma warning restore 612, 618
         }

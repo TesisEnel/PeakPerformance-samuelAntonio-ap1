@@ -14,11 +14,8 @@ builder.Services.AddBlazorBootstrap();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddDbContext<AppDBContext>(op =>
-{
-
-    op.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+var ConStr = builder.Configuration.GetConnectionString("ConStr");
+builder.Services.AddDbContext<AppDBContext>(Options => Options.UseSqlite(ConStr));
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<AutorizacionService>();
 builder.Services.AddScoped<EntrenadorService>();
