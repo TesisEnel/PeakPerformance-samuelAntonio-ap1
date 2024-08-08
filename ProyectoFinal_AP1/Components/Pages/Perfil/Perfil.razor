@@ -1,72 +1,104 @@
-﻿@page "/Perfil/{IdUsuario:int}"
+﻿@page "/Perfil"
 @inject UserService userService
+@inject SuscripcionService suscripcionService
 @inject NavigationManager navigationManager
+@rendermode InteractiveServer
 
 <EditForm Model="Usuario" OnValidSubmit="Guardar">
     <DataAnnotationsValidator />
 
-    <div class="card shadow-lg border-0 rounded" style="background-color: #f8f9fa;">
-        <div class="card-header bg-primary text-white" style="text-align: center;">
-            <h3><i class="fas fa-clipboard-list"></i> Datos personales</h3>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-3 mb-3 text-center">
-                    @if (Usuario.FotoPerfil != null)
-                    {
-                        <img src="data:image/png;base64,@Convert.ToBase64String(Usuario.FotoPerfil)" alt="Foto de Perfil" width="150" height="150" class="rounded-circle" />
-                    }
-                    <button class="btn btn-primary mt-2">Cambiar</button>
-                    <a href="#" class="d-block mt-2">¿Cambiar mi contraseña?</a>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-3 text-center">
+                @if (Usuario.FotoPerfil != null)
+                {
+                    <img src="data:image/png;base64,@Convert.ToBase64String(Usuario.FotoPerfil)" alt="Foto de Perfil" class="rounded-circle" width="100" height="100" />
+                }
+                <br />
+                
+            </div>
+            <div class="col-md-9">
+                <h3>Datos personales</h3>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="id" class="form-label">Id</label>
+                        <InputNumber id="id" @bind-Value="Usuario.IdUsuario" class="form-control" readonly />
+                        <ValidationMessage For="@(() => Usuario.IdUsuario)" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label">Nombres</label>
+                        <InputText id="nombre" @bind-Value="Usuario.Nombre" class="form-control" readonly />
+                        <ValidationMessage For="@(() => Usuario.Nombre)" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="apellido" class="form-label">Apellidos</label>
+                        <InputText id="apellido" @bind-Value="Usuario.Apellido" class="form-control" readonly />
+                        <ValidationMessage For="@(() => Usuario.Apellido)" />
+                    </div>
                 </div>
-                <div class="col-md-9">
-                    <div class="mb-3">
-                        <label for="Nombre" class="form-label">Nombres</label>
-                        <InputText id="Nombre" @bind-Value="Usuario.Nombre" class="form-control" readonly />
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="genero" class="form-label">Genero</label>
+                        <InputText id="genero" @bind-Value="Usuario.Genero" class="form-control" readonly />
+                        <ValidationMessage For="@(() => Usuario.Genero)" />
                     </div>
-                    <div class="mb-3">
-                        <label for="Apellido" class="form-label">Apellidos</label>
-                        <InputText id="Apellido" @bind-Value="Usuario.Apellido" class="form-control" readonly />
+                    <div class="col-md-6">
+                        <label for="correo" class="form-label">Correo</label>
+                        <InputText id="correo" @bind-Value="Usuario.Correo" class="form-control" readonly />
+                        <ValidationMessage For="@(() => Usuario.Correo)" />
                     </div>
-                    <div class="mb-3">
-                        <label for="Genero" class="form-label">Género</label>
-                        <InputText id="Genero" @bind-Value="Usuario.Genero" class="form-control" readonly />
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <InputText id="telefono" @bind-Value="Usuario.Telefono" class="form-control" readonly />
+                        <ValidationMessage For="@(() => Usuario.Telefono)" />
                     </div>
-                    <div class="mb-3">
-                        <label for="Correo" class="form-label">Correo Electrónico</label>
-                        <InputText id="Correo" @bind-Value="Usuario.Correo" class="form-control" readonly />
-                    </div>
-                    <div class="mb-3">
-                        <label for="Telefono" class="form-label">Teléfono</label>
-                        <InputText id="Telefono" @bind-Value="Usuario.Telefono" class="form-control" readonly />
-                    </div>
-                    <div class="mb-3">
-                        <label for="Direccion" class="form-label">Dirección</label>
-                        <InputText id="Direccion" @bind-Value="Usuario.Direccion" class="form-control" readonly />
-                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="direccion" class="form-label">Dirección</label>
+                    <InputText id="direccion" @bind-Value="Usuario.Direccion" class="form-control" readonly />
+                    <ValidationMessage For="@(() => Usuario.Direccion)" />
+                </div>
+                <div class="mb-3">
+                    <label for="diasRestantes" class="form-label">Días restantes de suscripción</label>
+                    <div id="diasRestantes" class="form-control">@DiasRestantes días</div>
                 </div>
             </div>
         </div>
-        <div class="card-footer bg-light d-flex justify-content-center mt-3">
-            <button type="submit" class="btn btn-outline-success ml-2"><span class="bi bi-check-circle-fill"></span> Guardar</button>
+        <div class="text-end mt-3">
+            <button type="submit" @onclick="Volver" class="btn btn-danger">Retroceder</button>
         </div>
     </div>
 </EditForm>
 
 @code {
-    [Parameter]
-    public int IdUsuario { get; set; }
+
+
 
     public Usuario Usuario { get; set; } = new Usuario();
+    public int DiasRestantes { get; set; }
+    public int SuscripcionSeleccionado { get; set; }
+    public int EntrenadorSeleccionado { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        Usuario = await userService.GetUserByIdAsync(IdUsuario);
+        Usuario = await userService.GetUserByIdAsync(2020);
+        DiasRestantes = suscripcionService.CalcularDiasRestantes(2020);
     }
 
-    public async Task Guardar()
+    private async Task Guardar()
     {
+        Usuario.IdSuscripcion = SuscripcionSeleccionado;
+        Usuario.IdEntrenador = EntrenadorSeleccionado;
+        Usuario.Estado = true;
+        Usuario.FechaInicioSuscripcion = DateTime.Now;
+        Usuario.FechaFinSuscripcion = DateTime.Now.AddMonths(1);
         await userService.ActualizarUsuario(Usuario);
-        navigationManager.NavigateTo("/Usuarios");
+        navigationManager.NavigateTo("/Perfil");
+    }
+    public void Volver()
+    {
+        navigationManager.NavigateTo("/Menu");
     }
 }

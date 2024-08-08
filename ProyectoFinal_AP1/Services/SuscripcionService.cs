@@ -2,6 +2,7 @@
 using ProyectoFinal_AP1.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using ProyectoFinal_AP1.Components.Pages.Usuarios;
 
 namespace ProyectoFinal_AP1.Services;
 
@@ -43,5 +44,18 @@ public class SuscripcionService
         return await _context.Suscripciones
             .AsNoTracking()
             .FirstOrDefaultAsync(p => p.IdSuscripcion == id);
+    }
+    public int CalcularDiasRestantes(int usuarioId)
+    {
+        var usuario = _context.Usuarios.Include(u => u.Suscripcion).FirstOrDefault(u => u.IdUsuario == usuarioId);
+        if (usuario == null || usuario.Suscripcion == null)
+        {
+            return -1; 
+        }
+
+        var fechaFin = usuario.Suscripcion.FechaFin;
+        var diasRestantes = (fechaFin - DateTime.Now).Days;
+
+        return diasRestantes >= 0 ? diasRestantes : 0;
     }
 }

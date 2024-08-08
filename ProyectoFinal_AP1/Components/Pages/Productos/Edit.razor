@@ -1,0 +1,119 @@
+﻿@page "/EditarProducto/{IdProducto:int}"
+@inject NavigationManager Navigation
+@inject ProductoService productoService
+@rendermode InteractiveServer
+<div class="page-specific">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars" style="color: white;"></i>
+            </button>
+
+            <a class="navbar-brand ms-2" href="#">
+                <img src="Images/LogoNombre.png" alt="Logo" style="height: 40px;">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                </ul>
+                <form class="d-flex ms-auto">
+                    <div class="dropdown">
+                        <a href="#" class="nav-link text-light" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-bars"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="/MenuAdmin">Admin</a></li>
+                            <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container mt-5">
+
+<EditForm Model="Producto" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+
+    <div class="card shadow-lg border-0 rounded" style="background-color: #f8f9fa;">
+        <div class="card-header bg-dark text-white" style="text-align: center;">
+            <h3><i class="fas fa-clipboard-list"></i> Editar Producto</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    @if (Producto.Foto != null)
+                    {
+                        <img src="data:image/png;base64,@Convert.ToBase64String(Producto.Foto)" alt="Foto de Perfil" width="100" height="100" class="rounded-circle float-right" />
+                    }
+                </div>
+              
+                
+            </div>
+            <div class="mb-3">
+                <label for="Nombre" class="form-label">Descripcion</label>
+                <InputText @bind-Value="Producto.Descripcion" class="form-control" />
+                <ValidationMessage For="@(() => Producto.Descripcion)" />
+            </div>
+            <div class="mb-3">
+                <label for="Apellido" class="form-label">Precio</label>
+                <InputNumber @bind-Value="Producto.Precio" class="form-control"  />
+                <ValidationMessage For="@(() => Producto.Precio)" />
+            </div>
+            <div class="mb-3">
+                <label for="Genero" class="form-label">Cantidad Disponible</label>
+                <InputNumber @bind-Value="Producto.Stock" class="form-control" />
+                <ValidationMessage For="@(() => Producto.Stock)" />
+            </div>
+            
+      
+        </div>
+        <div class="card-footer bg-light d-flex justify-content-center mt-3">
+            <div class="btn-group">
+                <button type="submit" class="btn btn-outline-success ml-2"><span class="bi bi-check-circle-fill"></span> Guardar</button>
+                <a type="button" href="/ProductosAdmin" class="btn btn-outline-danger"><span class="bi bi-arrow-bar-left"></span> Retroceder</a>
+            </div>
+        </div>
+    </div>
+</EditForm>
+</div>
+@code {
+
+    [Parameter]
+
+    public int IdProducto { get; set; }
+    public Producto Producto { get; set; } = new Producto();
+    private List<Producto> productos = new List<Producto>();
+
+    [Inject] protected ToastService toastService { get; set; }
+
+    public void NotificacionGuardo()
+    {
+        toastService.Notify(new(ToastType.Success, $"Se Edito el producto Correctamente."));
+    }
+    public void NotificacionError()
+    {
+        toastService.Notify(new(ToastType.Danger, $"Error al editar el producto."));
+    }
+    private async Task Guardar()
+    {
+        bool resultado = await productoService.ActualizarProducto(Producto);
+        if (resultado)
+        {
+            Navigation.NavigateTo("/ProductosAdmin");
+            NotificacionGuardo();
+        }
+        else
+        {
+            NotificacionError();
+        }
+    }
+
+ 
+
+    protected override async Task OnInitializedAsync()
+    {
+        Producto = await productoService.GetProductoByIdAsync(IdProducto);
+    }
+}

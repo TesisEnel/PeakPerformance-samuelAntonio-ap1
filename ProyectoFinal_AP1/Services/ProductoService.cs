@@ -30,4 +30,26 @@ public class ProductoService
     {
         return await _context.Productos.ToListAsync();
     }
+    public async Task<Producto?> GetProductoByIdAsync(int productoId)
+    {
+        return await _context.Productos.FindAsync(productoId);
+    }
+    public async Task<bool> ActualizarProducto(Producto producto)
+    {
+        var productoExistente = await _context.Productos.FindAsync(producto.IdProducto);
+        if (productoExistente == null)
+        {
+            return false;
+        }
+
+        productoExistente.Descripcion = producto.Descripcion;
+        productoExistente.Precio = producto.Precio;
+        productoExistente.Stock = producto.Stock;
+        productoExistente.Foto = producto.Foto;
+
+        _context.Productos.Update(productoExistente);
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
 }

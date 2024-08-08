@@ -5,34 +5,41 @@
 
 <EditForm Model="nuevoEntrenador" OnValidSubmit="GuardarEntrenador">
     <DataAnnotationsValidator />
-    <ValidationSummary />
 
-    <div class="form-group">
-        <label for="nombre">Nombre</label>
-        <InputText id="nombre" class="form-control" @bind-Value="nuevoEntrenador.Nombre" />
+    <div class="card shadow-lg border-0 rounded" style="background-color: #f8f9fa;">
+        <div class="card-header bg-dark text-white" style="text-align: center;">
+            <h3><i class="fas fa-clipboard-list"></i> Agregar Entrenador</h3>
+        </div>
+        <div class="card-body">
+           
+            <div class="mb-3">
+                <label for="Nombre" class="form-label">Nombre</label>
+                <InputText @bind-Value="nuevoEntrenador.Nombre" class="form-control"  />
+                <ValidationMessage For="@(() => nuevoEntrenador.Nombre)" />
+            </div>
+            <div class="mb-3">
+                <label for="Apellido" class="form-label">Nivel</label>
+                <InputText @bind-Value="nuevoEntrenador.Nivel" class="form-control"  />
+                <ValidationMessage For="@(() => nuevoEntrenador.Nivel)" />
+            </div>
+            <select id="genero" @bind="nuevoEntrenador.Genero" class="form-control">
+                <option value="">Seleccione el género</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+                <option value="Otro">Otro</option>
+            </select>
+            <div class="form-group">
+                <label for="fotoPerfil">Foto de Perfil</label>
+                <InputFile id="fotoPerfil" OnChange="CargarFotoPerfil" />
+            </div>
+        </div>
+        <div class="card-footer bg-light d-flex justify-content-center mt-3">
+            <div class="btn-group">
+                <button type="submit" class="btn btn-outline-success ml-2"><span class="bi bi-check-circle-fill"></span> Guardar</button>
+                <a type="button" href="/Usuarios" class="btn btn-outline-danger"><span class="bi bi-arrow-bar-left"></span> Retroceder</a>
+            </div>
+        </div>
     </div>
-
-    <div class="form-group">
-        <label for="nivel">Nivel</label>
-        <InputText id="nivel" class="form-control" @bind-Value="nuevoEntrenador.Nivel" />
-    </div>
-
-    <div class="form-group">
-        <label for="genero">Género</label>
-        <InputSelect id="genero" class="form-control" @bind-Value="nuevoEntrenador.Genero">
-            <option value="">Seleccionar</option>
-            <option value="Masculino">Masculino</option>
-            <option value="Femenino">Femenino</option>
-            <option value="Otro">Otro</option>
-        </InputSelect>
-    </div>
-
-    <div class="form-group">
-        <label for="fotoPerfil">Foto de Perfil</label>
-        <InputFile id="fotoPerfil" OnChange="CargarFotoPerfil" />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Guardar</button>
 </EditForm>
 
 @code {
@@ -49,6 +56,6 @@
     private async Task GuardarEntrenador()
     {
         await entrenadorService.GuardarEntrenador(nuevoEntrenador);
-        NavigationManager.NavigateTo("/Entrenadores");
+        NavigationManager.NavigateTo("/EntrenadoresAdmin");
     }
 }

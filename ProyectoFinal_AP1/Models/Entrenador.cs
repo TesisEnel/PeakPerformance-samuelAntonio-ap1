@@ -6,7 +6,9 @@ public class Entrenador
 {
     [Key]
     public int IdEntrenador { get; set; }
+    [Required(ErrorMessage = "El campo nombre es obligatorio.")]
     public string Nombre { get; set; }
+    [Required(ErrorMessage = "El campo nivel es obligatorio.")]
     public string Nivel { get; set; }
     public string Genero { get; set; }
     public byte[] FotoPerfil { get; set; }

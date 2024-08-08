@@ -33,37 +33,41 @@
         </div>
     </nav>
 </div>
-<EditForm Model="nuevaSuscripcion" OnValidSubmit="GuardarEntrenador">
+<div class="container mt-5">
+<EditForm Model="nuevaSuscripcion" OnValidSubmit="GuardarSuscripcion">
     <DataAnnotationsValidator />
-    <ValidationSummary />
 
-    <div class="form-group">
-        <label for="nombre">Descripcion</label>
-        <InputText id="nombre" class="form-control" @bind-Value="nuevaSuscripcion.Descripcion" />
+    <div class="card shadow-lg border-0 rounded" style="background-color: #f8f9fa;">
+        <div class="card-header bg-dark text-white" style="text-align: center;">
+            <h3><i class="fas fa-clipboard-list"></i> Agregar Equipo</h3>
+        </div>
+        <div class="card-body">
+
+            <div class="mb-3">
+                <label for="Descripcion" class="form-label">Descripcion</label>
+                <InputText @bind-Value="nuevaSuscripcion.Descripcion" class="form-control" />
+                <ValidationMessage For="@(() => nuevaSuscripcion.Descripcion)" />
+            </div>
+            <div class="mb-3">
+                <label for="Apellido" class="form-label">Precio</label>
+                <InputNumber @bind-Value="nuevaSuscripcion.Precio" class="form-control" />
+                <ValidationMessage For="@(() => nuevaSuscripcion.Precio)" />
+            </div>
+
+            <div class="form-group">
+                <label for="fotoPerfil">Foto</label>
+                <InputFile id="fotoPerfil" OnChange="CargarFotoPerfil" />
+            </div>
+        </div>
+        <div class="card-footer bg-light d-flex justify-content-center mt-3">
+            <div class="btn-group">
+                <button type="submit" class="btn btn-outline-success ml-2"><span class="bi bi-check-circle-fill"></span> Guardar</button>
+                <a type="button" href="/Usuarios" class="btn btn-outline-danger"><span class="bi bi-arrow-bar-left"></span> Retroceder</a>
+            </div>
+        </div>
     </div>
-
-    <div class="form-group">
-        <label for="nombre">Descripcion</label>
-        <InputNumber id="nombre" class="form-control" @bind-Value="nuevaSuscripcion.Precio" />
-    </div>
-
-    <div class="form-group">
-        <label for="nivel">Fecha</label>
-        <InputDate id="nivel" class="form-control" @bind-Value="nuevaSuscripcion.FechaInicio" />
-    </div>
-
-    <div class="form-group">
-        <label for="nivel">Fecha</label>
-        <InputDate id="nivel" class="form-control" @bind-Value="nuevaSuscripcion.FechaFin" />
-    </div>
-
-    <div class="form-group">
-        <label for="fotoPerfil">Foto de Perfil</label>
-        <InputFile id="fotoPerfil" OnChange="CargarFotoPerfil" />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Guardar</button>
 </EditForm>
+</div>
 
 @code {
     private SuscripcionModel nuevaSuscripcion = new SuscripcionModel();
@@ -76,9 +80,9 @@
         nuevaSuscripcion.FotoPerfil = buffer;
     }
 
-    private async Task GuardarEntrenador()
+    private async Task GuardarSuscripcion()
     {
         await suscripcionService.GuardarAsync(nuevaSuscripcion);
-        NavigationManager.NavigateTo("/Entrenadores");
+        NavigationManager.NavigateTo("/SuscripcionAdmin");
     }
 }

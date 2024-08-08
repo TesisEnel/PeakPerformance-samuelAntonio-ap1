@@ -34,7 +34,7 @@ public class UserService
     {
         return await _context.Usuarios.FirstOrDefaultAsync(u => u.Correo == email);
     }
-   
+
     public async Task<Usuario?> GetUserByIdAsync(int userId)
     {
         return await _context.Usuarios.FindAsync(userId);
@@ -60,9 +60,21 @@ public class UserService
         usuarioExistente.IdSuscripcion = usuario.IdSuscripcion;
         usuarioExistente.IdEntrenador = usuario.IdEntrenador;
 
+ 
+        if (usuario.IdSuscripcion.HasValue)
+        {
+            usuarioExistente.FechaInicioSuscripcion = DateTime.Now;
+            usuarioExistente.FechaFinSuscripcion = DateTime.Now.AddMonths(1); 
+        }
+
         _context.Usuarios.Update(usuarioExistente);
         await _context.SaveChangesAsync();
 
         return true;
     }
+    public async Task<List<Usuario>> ObtenerUsuariosPorEntrenador(int idEntrenador)
+    {
+        return await _context.Usuarios.Where(u => u.IdEntrenador == idEntrenador).ToListAsync();
+    }
+
 }
