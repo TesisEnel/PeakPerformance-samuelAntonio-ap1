@@ -1,3 +1,4 @@
+
 Proyecto Final - Sistema de Gestión de Gimnasio
 Descripción
 Este proyecto es el resultado final de la materia Programación Aplicada 1. Se trata de un sistema de gestión de gimnasio desarrollado en Blazor Server, que permite la administración de usuarios, suscripciones, entrenadores y otros aspectos relacionados con el funcionamiento de un gimnasio.
